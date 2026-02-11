@@ -9,23 +9,17 @@
     <button id="loadCars">Våra Bilar</button>
 
     <ul id="bilarLista"></ul>
+<div id="inloggningsFormulaer">
+    <h2>Login</h2>
+    <input id="username" placeholder="Username">
+        <input id="password" placeholder="****">
+    <button id="loginButton">Login</button>
 
-    <script>
-        document.getElementById('loadCars').addEventListener('click', () => {
-            fetch('api.php?action=bilar')
-                .then(response => response.json())
-                .then(bilar => {
-                    const list = document.getElementById('bilarLista');
-                    list.innerHTML = '';
+            <p id="loginStatus"></p>
+</div>
 
-                    bilar.forEach(bil => {
-                        const li = document.createElement('li');
-                        li.textContent = `${bil.id} ${bil.name} ${bil.type}`;
-                        list.appendChild(li);
-                    });
-                });
-        });
-    </script>
+<script src="js/bilar.js"> </script>
+<script src="js/login.js"> </script>
+
 </body>
 </html>
-
