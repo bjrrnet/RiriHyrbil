@@ -1,12 +1,13 @@
 #!/bin/zsh
 set -e
+setopt NULL_GLOB
 
 source "$(dirname "$0")/config.env"
 
 echo "Migrerar till '$DB'."
-for f in $(ls -l ../migrations/*.sql 2>/dev/null | sort); do
+for f in ../migrations/*.sql; do
     echo "Running $f"
-    mysql -u "$USER" -h "$HOST" "$DB" < "$f"
-done
+    sudo mariadb "$DB" < "$f"
+    done
 
 echo "Slutförd."

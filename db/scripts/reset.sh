@@ -1,22 +1,24 @@
 #!/bin/zsh
-
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 set -e
+setopt NULL_GLOB
 
-source "$(dirname "$0")/config.env
+source "$SCRIPT_DIR/config.env"
 
 echo "Återskapar '$DB'."
-mysql -u "$USER" -h "$HOST" -e
+sudo mariadb -e "DROP DATABASE IF EXISTS $DB; CREATE DATABASE $DB;" 
 
 echo "Init script."
-for f in $(ls -l ../init/*.sql | sort); do
+
+for f in "$SCRIPT_DIR/../init/"*.sql; do
     echo "Kör $f"
-    mysql -u "$USER" -h "$HOST" "$DB" < "$f"
+    sudo mariadb "$DB" < "$f"
 done
 
 echo "Migrerar"
-for f in $(ls -l ../migrations/*.sql 2>/dev/null | sort); do
+for f in "S$SCRIPT_DIR/../migrations/"*.sql; do
     echo "Kör $f"
-    mysql -u "$USER" -h "$HOST" "$DB" < "$f"
+    sudo mariadb "$DB" < "$f"
 done
 
 echo "Databas återställd"

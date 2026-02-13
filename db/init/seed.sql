@@ -1,5 +1,3 @@
-USE databas;
-
 INSERT INTO car_type (name, description) VALUES
 ('Kombi', 'Femdörrars med extra lastutrymme'),
 ('Van', 'Tresitsig skåpbil med stort lastutrymme'),

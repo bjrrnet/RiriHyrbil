@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS databas;
 USE databas;
 
-CREATE TABLE user (
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -33,7 +33,7 @@ CREATE TABLE rentals (
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (car_id) REFERENCES cars(id)
 );
 
