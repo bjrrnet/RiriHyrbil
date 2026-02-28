@@ -37,6 +37,21 @@ if ($action === 'login') {
     exit;
 }
 
+if ($action === 'register') {
+    $data = json_decode(file_get_contents("php://input"), true);
+    
+    $firstName = $data['first_name'];
+    $lastName = $data['last_name'];
+    $email = $data['email'];
+    $password = password_hash($data['password'], PASSWORD_DEFAULT); 
+    
+    $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+    $result = $stmt->execute([$firstName, $lastName, $email, $password]);
+
+    echo json_encode(["success" => $result]);
+    exit;
+}
+
 if ($action === 'checkLogin') {
     echo json_encode([
         "loggedIn"=> isset($_SESSION['user_id']),
