@@ -7,22 +7,43 @@
     <link rel="stylesheet" href="../css/biluthyrning.css">
 </head>
 <body class="headside-bgColor">
-    <div id="bilix-logo">
-        <a href="biluthyrning.html">
-            <img src="../html/social/car_logo.png" alt="Bilix logo">
-        </a>    
-    </div>
-
     <header id="db_navbar">
-        <div class="search-box">
-            <input type="text" placeholder="Search  cars...">
+        <div class="nav-left">
+            <div id="hamburger-menu">
+                <img src="../html/social/main-menu.png" alt="Menu logo" width="30">
+                <span class="menu-text">Meny</span>
+            </div>
+            <div id="bilix-logo">
+                <a href="biluthyrning.html">
+                    <img src="../html/social/car_logo.png" alt="Bilix logo">
+                </a>    
+            </div>
         </div>
-        <div id="db_navBarCaption">
-            <a href="bil_login.html" class="nav-btn" id="db_btn_signIn">Sign In</a>
-            <a href="bil_register.html" class="nav-btn" id="db_btn_regi">Register</a>
+        
+        <div class="nav-right">
+            <a href="../html/bil_login.html" class="icon-item">
+                <img src="../html/social/user-icon.png" alt="User" >
+                <span>Logg in</span>
+            </a>
+
+            <a href="cart.html" class="icon-item">
+                <img src="../html/social/boka.png" alt="Boka">
+                <span class="badge">0</span>
+                <span>Boka bil</span>
+            </a>
         </div>
-          
+
+        <div id="menu-options" class="hidden">
+            <a href="nyheter.html">Nyheter</a>
+            <a href="omoss.html">Om Oss</a>
+            <a href="cars.html">Cars Page</a>
+            <a href="tillhor.html">Tillhör</a>
+            <a href="kontakta.html">Kontakta</a>
+            <a href="../html/bil_login.html">Login</a>
+        </div>
+        <div id="overlay"></div>
     </header>
+
     <section id="db_mainWall">
         <div id="db_mainCaption">
             <h1 id="db_h1">Bilix</h1>
@@ -35,13 +56,39 @@
             <h2 id="db_newCarReviews">New Car Reviews</h2>
             <p>Our expert reviewers report back with the latest</p>
         </div>
+        
+        <div class="bilix-car-grid">
+            <div class="bilix-car-item">
+                <h3>BMW X5</h3>
+                <p>Premium SUV</p>
+            </div>
+            <div class="bilix-car-item">
+                <h3>Audi A6</h3>
+                <p>Luxury Sedan</p>
+            </div>
+            <div class="bilix-car-item">
+                <h3>Tesla Model 3</h3>
+                <p>Electric Future</p>
+            </div>
+        </div>
+    </section>
+    <section class="bilix-booking-section">
+        <div class="bilix-search-bar">
+            <input type="text" placeholder="Pick-up location">
+            <input type="date">
+            <button class="search-btn">Search</button>
+        </div>
+        <div class="bilix-filters">
+            <button class="filter-btn active">All Cars</button>
+            <button class="filter-btn">Electric</button>
+            <button class="filter-btn">SUV</button>
+            <button class="filter-btn">Luxury</button>
+        </div>
     </section>
 
     <footer id="db_footer">
-
         <div class="footer-top">
             <span>Get connected with us on social networks :</span>
-
             <div class="social-icons">
                 <a href="#"><img src="../html/social/google.png"></a>
                 <a href="#"><img src="../html/social/facebook.png"></a>
@@ -53,36 +100,46 @@
 
         <div class="footer-main">
             <img src="../html/social/car_logo.png" class="footer-logo">
-
             <div class="footer-col">
                 <h6>Bilix</h6>
                 <p>Online car rental service.</p>
             </div>
-
             <div class="footer-col">
                 <h6>Products</h6>
                 <p><a href="#">Chevrolet</a></p>
                 <p><a href="#">BMW</a></p>
                 <p><a href="#">Dodge</a></p>
             </div>
-
             <div class="footer-col">
                 <h6>Useful links</h6>
                 <p><a href="#">Help</a></p>
                 <p><a href="#">Rating</a></p>
             </div>
-
             <div class="footer-col">
                 <h6>Contact</h6>
                 <p>Email: bilix@gmail.com</p>
                 <p>Phone: +46 735 868 805</p>
             </div>
         </div>
-
         <div class="footer-bottom">
             © 2026 Alpha X Software Company
         </div>
-
     </footer>
+
+    <script>
+        const hamburger = document.getElementById("hamburger-menu");
+        const sideMenu = document.getElementById("menu-options");
+        const overlay = document.getElementById("overlay");
+
+        hamburger.addEventListener("click", () => {
+            sideMenu.classList.toggle("show");
+            overlay.classList.toggle("show");
+        });
+
+        overlay.addEventListener("click", () => {
+            sideMenu.classList.remove("show");
+            overlay.classList.remove("show");
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" href="../css/cars_page.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <h2>Car Rental</h2>
+    <div>
+        <a href="cart.html">Cart</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="login.html">Login</a>
+    </div>
+</nav>
+
+<h1 class="title">Available Cars</h1>
+
+<section class="filters">
+    <select id="filterType">
+        <option value="all">All Types</option>
+        <option value="SUV">SUV</option>
+        <option value="Sedan">Sedan</option>
+    </select>
+
+    <select id="sortPrice">
+        <option value="default">Sort by Price</option>
+        <option value="low">Lowest First</option>
+        <option value="high">Highest First</option>
+    </select>
+</section>
+
+<section id="carsContainer" class="cars-grid">
+</section>
+
+<script src="cars.js"></script>
+</body>
+</html>
