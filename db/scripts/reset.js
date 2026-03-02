@@ -4,11 +4,19 @@ import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 
+// __ innan namn = konvention, betyder ingenting.
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+//Hämtar config.env från våran valda directory, så vi har en 
 dotenv.config({ path: join(__dirname, "config.env") });
 
+//Hämtar användare, pass och host och sparar i variabler. Används för tillfället inte.
+const USER = process.env.USER;
+const PASS = process.env.PASS;
+const HOST = process.env.HOST;
 const DB = process.env.DB;
+
 if (!DB) {
   console.error("Fel: DB saknas i config.env");
   process.exit(1);
