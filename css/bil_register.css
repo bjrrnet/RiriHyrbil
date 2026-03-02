@@ -1,0 +1,102 @@
+#bilix-logo img {
+   width: 200px;
+    height: 100px;
+    position: absolute;
+    left: -10px;
+    top: -10px;
+}
+.fp_bg_img {
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../html/social/Gemini_Generated_Image_n26t8gn26t8gn26t.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, sans-serif;}
+
+.card {
+    display: flex;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    background-color: #383838;
+    box-shadow: 0 0 50px rgba(21, 21, 21, 0.2);
+    border-radius: 30px;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.right-side {
+    flex: 1;
+    width: 100%; 
+    padding:  30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.right-side h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #e85111;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 50px;
+    border: 1px solid #545454;
+    font-size: 14px;
+}
+
+.btn {
+    width: 350px;
+    padding: 12px;
+    background:linear-gradient(30deg, #393939, #313a6e, #010d52);
+    color: rgb(255, 255, 255); 
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover {
+    background: #e85111;
+}
+.text-center {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.text-center a {
+    color: #e85111;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
