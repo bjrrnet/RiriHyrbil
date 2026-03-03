@@ -12,3 +12,6 @@ Saker att städas:
     db mappen onödig, init scriptet bör vid detta laget kunna skrotas.
 
     lägg till alla endpoints i endpoints.txt eller skrota.
+
+    ändra DB från name till first_name och last_name
+
