@@ -21,11 +21,11 @@ switch ($action) {
     //GET /api.php?action=availableCars&startYYYY-MM-DD&end=YYYY-MM-DD
     //ger alla bilar som är tillgängliga i givet spann
         $start = $_GET['start'] ?? null;
-        $end = $GET['end'] ?? null;
+        $end = $_GET['end'] ?? null;
 
         if (!$start || !$end) {
             http_response_code(400);
-            echo json_encode("success" => false, "message" => "Missing date"]);
+            echo json_encode(["success" => false, "message" => "Missing date"]);
             break;
         }
 
@@ -115,17 +115,17 @@ switch ($action) {
             break;
         }
 
-        $booking_id = $data(['booking_id'] ?? null;
-        if (!booking_id) {
-            http_response_(400);
+        $booking_id = $data['booking_id'] ?? null;
+        if (!$booking_id) {
+            http_response_code(400);
             echo json_encode(["success" => false, "message" => "Missing booking_id"]);
             break;
         }
 
-        $stmt = $pdo->prepare("DELETE FROM bookings WHERE ID = ? AND USER ID = ?");
+        $stmt = $pdo->prepare("DELETE FROM bookings WHERE id = ? AND user_id = ?");
         $stmt->execute([$booking_id, $_SESSION['user_id']]);
 
-        if ($stmt->rowcount() > 0) {
+        if ($stmt->rowCount() > 0) {
             echo json_encode(["success" => true]);
         } else {
             http_response_code(403);
@@ -133,44 +133,21 @@ switch ($action) {
         }
         break;
 
+    case 'register':
+        $username = $data['username'];
+        $firstName = $data['first_name'];
+        $lastName = $data['last_name'];
+        $email = $data['email'];
+        $password = password_hash($data['password'], PASSWORD_DEFAULT); 
+        
+        $stmt = $pdo->prepare("INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)");
+        $result = $stmt->execute([$username, $firstName, $lastName, $email, $password]);
+
+        echo json_encode(["success" => $result]);
+        exit;
+
     default:
         http_response_code(400);
         echo json_encode(["error" => "Unknown action: '$action'"]);
         break;
     }
-<<<<<<< HEAD
-=======
-    exit;
-}
-
-if ($action === 'register') {
-    $data = json_decode(file_get_contents("php://input"), true);
-    
-    $firstName = $data['first_name'];
-    $lastName = $data['last_name'];
-    $email = $data['email'];
-    $password = password_hash($data['password'], PASSWORD_DEFAULT); 
-    
-    $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-    $result = $stmt->execute([$firstName, $lastName, $email, $password]);
-
-    echo json_encode(["success" => $result]);
-    exit;
-}
-
-if ($action === 'checkLogin') {
-    echo json_encode([
-        "loggedIn"=> isset($_SESSION['user_id']),
-        "username" => $_SESSION['username'] ?? null
-    ]);
-    exit;
-}
-
-if ($action === 'logout') {
-    session_destroy();
-    echo json_encode(["success" => true]);
-    exit;
-}
-
-echo json_encode(["error" => "Unknown Action"]);
->>>>>>> 27c7a5ca65ce1d3bb28fe517a570d88a21758c25
