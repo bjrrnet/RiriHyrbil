@@ -6,7 +6,7 @@ document.getElementById('btnResetPassword').addEventListener('click', function()
         return;
     }
 
-    fetch('../php/backend.php?action=forgot_password', {
+    fetch('../public/api.php?action=forgot_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email })

@@ -4,7 +4,7 @@ document.getElementById('btn_Login').addEventListener('click', function() {
         password: document.getElementById('txtPassword').value
     };
 
-    fetch('../php/backend.php?action=login', {
+    fetch('../public/api.php?action=login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginData)
