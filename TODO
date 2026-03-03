@@ -1,0 +1,14 @@
+TODO-lista:
+
+Saker som saknas enl. frontend:
+    cars.js
+    
+
+Saker att städas:
+    2 js mappar, en i public/js och en i huvudmappen.
+    Beroende på vilken som ska användas måste filer städas i för att överenskomma.
+    api.php ligger i public/js, så föreslår att det är mappen men det är inte så noga.
+
+    db mappen onödig, init scriptet bör vid detta laget kunna skrotas.
+
+    lägg till alla endpoints i endpoints.txt eller skrota.
