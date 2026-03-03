@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "../src/databas.php";
+require "src/databas.php";
 
 header("Content-type: application/json");
 

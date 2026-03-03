@@ -14,7 +14,7 @@ document.getElementById('btn_Register').addEventListener('click', function() {
         return; 
     }
 
-    fetch('../public/api.php?action=register', {
+    fetch('../api.php?action=register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
