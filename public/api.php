@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require "src/databas.php";
+require "../src/databas.php";
 
 header("Content-type: application/json");
 
@@ -14,7 +14,8 @@ switch ($action) {
     case 'bilar' :
     	$stmt = $pdo->query("SELECT * FROM bilar");
     	$bilar = $stmt->fetchAll(PDO::FETCH_ASSOC);	
-    	echo json_encode($bilar);
+//      https://www.php.net/manual/en/pdo.constants.fetch-modes.php
+        echo json_encode($bilar);
     break;
 
     case 'availableCars':
@@ -85,6 +86,7 @@ switch ($action) {
             http_response_code(400);
             echo json_encode(["success" => false, "message" => "Missing required fields"]);
             break;
+        }
 
         $stmt = $pdo->prepare("
             INSERT INTO bookings (user_id, car_id, start_date, end_date) VALUES (?, ?, ?, ?)
@@ -101,7 +103,7 @@ switch ($action) {
         }
     
         $stmt = $pdo->prepare("
-            SELECT b.*, c.model, c.brand FROM bookings b
+            SELECT b.*, c.model, c.brand FROM rentals b
             JOIN bilar c ON b.car_id = c.id WHERE b.user_id = ?
         ");
         $stmt->execute([$_SESSION['user_id']]);
@@ -122,7 +124,7 @@ switch ($action) {
             break;
         }
 
-        $stmt = $pdo->prepare("DELETE FROM bookings WHERE id = ? AND user_id = ?");
+        $stmt = $pdo->prepare("DELETE FROM rentals WHERE id = ? AND user_id = ?");
         $stmt->execute([$booking_id, $_SESSION['user_id']]);
 
         if ($stmt->rowCount() > 0) {
@@ -138,13 +140,13 @@ switch ($action) {
         $firstName = $data['first_name'];
         $lastName = $data['last_name'];
         $email = $data['email'];
-        $password = password_hash($data['password'], PASSWORD_DEFAULT); 
+        $password_hash = password_hash($data['password'], PASSWORD_DEFAULT); 
         
-        $stmt = $pdo->prepare("INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)");
-        $result = $stmt->execute([$username, $firstName, $lastName, $email, $password]);
+        $stmt = $pdo->prepare("INSERT INTO users (username, first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?, ?)");
+        $result = $stmt->execute([$username, $firstName, $lastName, $email, $password_hash]);
 
         echo json_encode(["success" => $result]);
-        exit;
+        break;
 
     default:
         http_response_code(400);
