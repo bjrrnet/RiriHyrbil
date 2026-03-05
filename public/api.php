@@ -141,7 +141,21 @@ switch ($action) {
         $lastName = $data['last_name'];
         $email = $data['email'];
         $password_hash = password_hash($data['password'], PASSWORD_DEFAULT); 
-        
+
+        // Kolla efter existerande mail eller användrnamn.
+        $tjeck = $pdo->prepare("SELECT id FROM users WHERE username = ?");
+        $tjeck->execute([$username]);
+        if ($tjeck->fetch()) {
+            echo json_encode(["success" => false, "message" => "Username already in use."]);
+            break;
+        }
+
+        $tjeck = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $tjeck->execute([$email]);
+        if ($tjeck->fetch()) {
+            echo json_encode(["success" => false, "message" => "Email already in use."]);
+            break;
+        }
         $stmt = $pdo->prepare("INSERT INTO users (username, first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?, ?)");
         $result = $stmt->execute([$username, $firstName, $lastName, $email, $password_hash]);
 
