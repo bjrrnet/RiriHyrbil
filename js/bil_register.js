@@ -9,6 +9,11 @@ document.getElementById('btn_Register').addEventListener('click', function() {
 
     const confirmPassword = document.getElementById('txtConfirmPassword').value;
     
+    if (!userData.username ||!userData.first_name ||!userData.last_name || !userData.email ||!userData.password || !userdata.confirmPassword) {
+        alert("All fields required.");
+        return;
+    }
+
     if (userData.password !== confirmPassword) {
         alert("Passwords do not match. Please try again.");        
         return; 
@@ -25,7 +30,7 @@ document.getElementById('btn_Register').addEventListener('click', function() {
             alert("Account created successfully. Welcome!");
             window.location.href = 'bil_login.html';
         } else {
-            alert("An error occurred during registration. Perhaps the username already exists?");
+            alert(data.message || "An error occurred during registration");
         }
     })
     .catch(error => {
