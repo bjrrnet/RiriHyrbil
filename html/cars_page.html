@@ -1,40 +1,132 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png"  href="../html/social/head.png?v=2">
     <link rel="stylesheet" href="../css/cars_page.css">
+    <title>Bilix|Cars</title>
 </head>
 <body>
+    <header id="db_navbar">
+        <div class="nav-left">
+            <div id="hamburger-menu">
+                <img src="../html/social/main-menu.png" alt="Menu logo" width="30">
+                <span class="menu-text">Meny</span>
+            </div>
+            <div id="bilix-logo">
+                <a href="biluthyrning.html">
+                    <img src="../html/social/car_logo.png" alt="Bilix logo">
+                </a>    
+            </div>
+        </div>
+        
+        <div class="nav-right">
+            <a href="../html/bil_login.html" class="icon-item">
+                <img src="../html/social/user-icon.png" alt="User" >
+                <span>Log In</span>
+            </a>
 
-<nav class="navbar">
-    <h2>Car Rental</h2>
-    <div>
-        <a href="cart.html">Cart</a>
-        <a href="favorites.html">Favorites</a>
-        <a href="login.html">Login</a>
-    </div>
-</nav>
+            <a href="cart.html" class="icon-item">
+                <img src="../html/social/boka.png" alt="Boka">
+                <span class="badge">0</span>
+                <span>Book Car</span>
+            </a>
+        </div>
 
-<h1 class="title">Available Cars</h1>
+        <div id="menu-options" class="hidden">
+            <a href="nyheter.html">Nyheter</a>
+            <a href="omoss.html">About Blix
+            <a href="cars.html">Our Cars</a>
+            <a href="tillhor.html">Tillhör</a>
+            <a href="kontakta.html">Conact </a>
+            <a href="../html/bil_login.html">Log In</a>
+        </div>
+        <div id="overlay"></div>
+    </header>
 
-<section class="filters">
-    <select id="filterType">
-        <option value="all">All Types</option>
-        <option value="SUV">SUV</option>
-        <option value="Sedan">Sedan</option>
+    <section class="sectionArea">
+        <div class="featuresTop">
+            <h2 id="db_newCarReviews">New Car Reviews</h2>
+            <p>Our expert reviewers report back with the latest</p>
+        </div>
+        
+        <div class="bilix-car-grid">
+            <div class="bilix-car-item">
+                <h3>BMW X5</h3>
+                <p>Premium SUV</p>
+            </div>
+            <div class="bilix-car-item">
+                <h3>Audi A6</h3>
+                <p>Luxury Sedan</p>
+            </div>
+            <div class="bilix-car-item">
+                <h3>Tesla Model 3</h3>
+                <p>Electric Future</p>
+            </div>
+        </div>
+    </section>
+    <section class="bilix-booking-section">
+        <div class="bilix-search-bar">
+    <select name="location" class="search-input">
+        <option value="" disabled selected>Välj plats</option>
+        <option value="goteborg">Göteborg</option>
+        <option value="stockholm">Stockholm</option>
+        <option value="malmo">Malmö</option>
     </select>
+    
+    <input type="date" class="search-input" placeholder="Från">
+    <input type="date" class="search-input" placeholder="Till">
+    
+    <button class="search-btn">Search</button>
+</div>
+        <div class="bilix-filters">
+            <button class="filter-btn active">All Cars</button>
+            <button class="filter-btn">Electric</button>
+            <button class="filter-btn">SUV</button>
+            <button class="filter-btn">Luxury</button>
+        </div>
+    </section>
 
-    <select id="sortPrice">
-        <option value="default">Sort by Price</option>
-        <option value="low">Lowest First</option>
-        <option value="high">Highest First</option>
-    </select>
-</section>
+    <footer id="db_footer">
+        <div class="footer-top">
+            <span>Get connected with us on social networks :</span>
+            <div class="social-icons">
+                <a href="#"><img src="../html/social/google.png"></a>
+                <a href="#"><img src="../html/social/facebook.png"></a>
+                <a href="#"><img src="../html/social/instagram.png"></a>
+                <a href="#"><img src="../html/social/twitter.png"></a>
+                <a href="#"><img src="../html/social/linkedin.png"></a>
+            </div>
+        </div>
 
-<section id="carsContainer" class="cars-grid">
-</section>
+        <div class="footer-main">
+            <img src="../html/social/car_logo.png" class="footer-logo">
+            <div class="footer-col">
+                <h6>Bilix</h6>
+                <p>Online car rental service.</p>
+            </div>
+            <div class="footer-col">
+                <h6>Products</h6>
+                <p><a href="#">Chevrolet</a></p>
+                <p><a href="#">BMW</a></p>
+                <p><a href="#">Dodge</a></p>
+            </div>
+            <div class="footer-col">
+                <h6>Useful links</h6>
+                <p><a href="#">Help</a></p>
+                <p><a href="#">Rating</a></p>
+            </div>
+            <div class="footer-col">
+                <h6>Contact</h6>
+                <p>Email: bilix@gmail.com</p>
+                <p>Phone: +46 735 868 805</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Alpha X Software Company
+        </div>
+    </footer>
 
-<script src="cars.js"></script>
 </body>
 </html>
