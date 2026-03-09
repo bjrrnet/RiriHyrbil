@@ -1,3 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; 
+}
+
 .login_bgColor {
     background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../html/social/Gemini_Generated_Image_n26t8gn26t8gn26t.png') no-repeat center center;
     background-size: cover;
