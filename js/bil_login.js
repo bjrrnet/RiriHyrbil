@@ -4,6 +4,11 @@ document.getElementById('btn_Login').addEventListener('click', function() {
         password: document.getElementById('txtPassword').value
     };
 
+    if (!loginData.username || !loginData.password) {
+        alert("Both fields required.");
+        return;
+    }
+
     fetch('../public/api.php?action=login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -14,7 +19,7 @@ document.getElementById('btn_Login').addEventListener('click', function() {
         if (result.success) {
             alert("Login successful. Welcome back!");            window.location.href = 'biluthyrning.html'; // حولي المستخدم للصفحة الرئيسية
         } else {
-            alert("Invalid username or password. Please try again.");        }
+            alert(data.message || "Invalid username or password. Please try again.");        }
     })
     .catch(error => {
         console.error('Error:', error);
