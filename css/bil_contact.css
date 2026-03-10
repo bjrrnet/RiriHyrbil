@@ -1,7 +1,7 @@
 * {
+    box-sizing: border-box; 
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
 }
 
 body {
@@ -9,6 +9,7 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 
@@ -80,7 +81,7 @@ body {
 }
 
 .asterisk {
-    color: #c0392b;
+    color: #e85111;
     margin-right: 4px;
 }
 
@@ -134,7 +135,8 @@ body {
 
 #db_footer { 
     background: linear-gradient(135deg, #505160, #0f1e6e); 
-    color: white; 
+    color: rgb(255, 255, 255); 
+    
 }
 .footer-top { 
     display: flex; 
@@ -176,15 +178,17 @@ body {
 .footer-col h6 { 
     margin-bottom: 15px; 
     font-size: 18px; 
-    border-bottom: 2px solid #f39c12; 
+    border-bottom: 2px solid #e85111; 
     display: inline-block; 
 }
 .footer-col p { 
     margin-bottom: 8px; 
 }
 .footer-col a { 
-    color: #ddd; 
+    color: #ffffff; 
     text-decoration: none; 
+    
+    
 }
 .footer-bottom { 
     text-align: center;
