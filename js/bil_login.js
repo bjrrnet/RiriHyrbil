@@ -6,6 +6,11 @@ document.getElementById('btn_Login').addEventListener('click', function(event) {
         password: document.getElementById('txtPassword').value
     };
 
+    if (!loginData.username || !loginData.password) {
+        alert("Both fields required.");
+        return;
+    }
+
     fetch('../public/api.php?action=login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

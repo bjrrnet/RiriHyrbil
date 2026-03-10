@@ -25,7 +25,7 @@ switch ($action) {
         $end = $_GET['end'] ?? null;
 
         if (!$start || !$end) {
-            http_response_code(400);
+            http_response_code(400); // https://www.w3schools.com/tags/ref_httpmessages.asp   --- OBS! Lite inkonsekvent använt i projektet, ändras om tid finnes.
             echo json_encode(["success" => false, "message" => "Missing date"]);
             break;
         }
@@ -54,14 +54,14 @@ switch ($action) {
 
             echo json_encode(["success" => true]);
         }  else  {
-            echo json_encode(["success" => false]);
+            echo json_encode(["success" => false, "message" => "Invalid username or password"]);
         }
     break;
 
 
     case 'checkLogin':
         echo json_encode([
-            "loggedIn"=> isset($_SESSION['user_id']),
+            "loggedIn"=> isset($_SESSION['user_id']), // "isset" som i is set, kollar om en variabel "is set" dvs deklarerad och not null. https://www.w3schools.com/php/func_var_isset.asp
             "username" => $_SESSION['username'] ?? null
         ]);
     break;
@@ -70,6 +70,52 @@ switch ($action) {
         session_destroy();
         echo json_encode(["success" => true]);
     break;
+
+    case 'changeName':
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(["success" => false, message => "Not logged in."]);
+            break;
+        }
+
+        $firstName  = $data['first_name'] ?? null;
+        $lastName   = $data['last_name'] ?? null;
+
+        if (!firstName || !lastName) {
+            echo json_encode(["success" => false, message => "Both first and last name required"]);
+            break;
+        }
+
+        $stmt     = $pdo->prepare("UPDATE users SET first_name = ?, last_name = ? WHERE id = ?");
+        $response = $stmt->execute([$firstName, $lastName, $_SESSION['user_id']]);
+        echo json_decode(["success" =>  $response]);
+        break;
+
+    case 'changeEmail':
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(["success" => false, message => "You need to be logged in."]);
+            break;
+        }
+
+        $stmt       = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
+        $response   = $stmt->execute([$email, $_SESSION['user_id']]);
+        echo json_decode(["success" => $response]);
+        break;
+    
+    case 'changePhoneNr':
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(["success" => false, message => "Both first and last name required"]);
+            break;
+        }
+
+        $stmt       = $pdo->prepare("UPDATE users SET phone_number = ? WHERE id = ?");
+        $response   = $stmt->execute([$email, $_SESSION['user_id']]);
+        echo json_decode(["success" => $response]);
+        break;
+
+    case 'change':
 
     case 'book':
         if (!isset($_SESSION['user_id'])) {
@@ -142,7 +188,7 @@ switch ($action) {
         $email = $data['email'];
         $password_hash = password_hash($data['password'], PASSWORD_DEFAULT); 
 
-        // Kolla efter existerande mail eller användrnamn.
+        // Kolla efter existerande mail eller användarnamn.
         $tjeck = $pdo->prepare("SELECT id FROM users WHERE username = ?");
         $tjeck->execute([$username]);
         if ($tjeck->fetch()) {
