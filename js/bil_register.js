@@ -9,7 +9,7 @@ document.getElementById('btn_Register').addEventListener('click', function() {
 
     const confirmPassword = document.getElementById('txtConfirmPassword').value;
     
-    if (!userData.username ||!userData.first_name ||!userData.last_name || !userData.email ||!userData.password || !userdata.confirmPassword) {
+    if (!userData.username ||!userData.first_name ||!userData.last_name || !userData.email ||!userData.password || !confirmPassword) {
         alert("All fields required.");
         return;
     }
