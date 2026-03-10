@@ -207,14 +207,14 @@ body {
     flex: 1; 
     padding: 12px; 
     border: 1px solid #ddd; 
-    border-radius: 8px; 
+    border-radius: 50px; 
 }
 
 .search-input {
     flex: 1;
     padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 50px;
     background-color: white;
     font-size: 14px;
     color: #555;
@@ -223,18 +223,28 @@ body {
 select.search-input {
     cursor: pointer;
 } 
+.search-btn { 
+    padding: 12px 25px; 
+    border: none; 
+    background: #e85111; 
+    color: white; 
+    border-radius: 50px; 
+    cursor: pointer; 
+}
+
 .bilix-filters { 
     display: flex; 
     gap: 10px; 
     justify-content: center; 
 }
 
+
 .filter-btn { 
     padding: 8px 20px; 
     border: 1px solid #e85111; 
     background: transparent; 
     color: #e85111; 
-    border-radius: 20px; 
+    border-radius: 50px; 
     cursor: pointer; 
     transition: 0.3s; 
 }

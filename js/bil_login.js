@@ -1,4 +1,6 @@
-document.getElementById('btn_Login').addEventListener('click', function() {
+document.getElementById('btn_Login').addEventListener('click', function(event) {
+    event.preventDefault(); 
+
     const loginData = {
         username: document.getElementById('txtUserName').value,
         password: document.getElementById('txtPassword').value
@@ -12,9 +14,13 @@ document.getElementById('btn_Login').addEventListener('click', function() {
     .then(response => response.json())
     .then(result => {
         if (result.success) {
-            alert("Login successful. Welcome back!");            window.location.href = 'biluthyrning.html'; // حولي المستخدم للصفحة الرئيسية
+            localStorage.setItem("isLoggedIn", "true");
+            
+            alert("Login successful. Welcome back!");
+            window.location.href = 'biluthyrning.html'; 
         } else {
-            alert("Invalid username or password. Please try again.");        }
+            alert("Invalid username or password.");
+        }
     })
     .catch(error => {
         console.error('Error:', error);
