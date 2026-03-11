@@ -1,12 +1,234 @@
-* {
+* {    
+    box-sizing: border-box; 
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    background-color: #f4f7f6;
     width: 100%;
     overflow-x: hidden; 
+}
+
+#db_navbar { 
+    position: relative; 
+    top: 0; 
+    width: 100%; 
+    height: 90px;
+    background: linear-gradient(135deg, #505160, #0f1e6e);
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 40px;
+    color: white;
+}
+
+.nav-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 30px; 
+}
+
+
+#bilix-logo img { 
+    height: 110px; 
+    width: auto; 
+    display: block; 
+    object-fit: contain; 
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;              
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    font-size: 14px;        
+    gap: 5px;               
+    position: relative;     
+}
+
+.icon-item img {
+    height: 45px;           
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease;
+}
+
+.icon-item:hover img {
+    transform: scale(1.1);
+}
+
+.profile-container {
+    min-height: calc(100vh - 200px); 
+    padding-bottom: 50px;
+}
+
+.profile-header h1 {
+    color: #0f1e6e;
+    margin-bottom: 60px;
+    text-align: left;
+    margin: 50px 0 30px 20px;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.detail-item p {
+    font-weight: bold;
+    color: #333;
+}
+
+.side-card {
+    border-left: 5px solid #e85111;
+}
+
+.status-text {
+    color: #666;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btn-main-logout {
+    background: #e85111; 
+    color: white; 
+    width: 100%; 
+    border: none; 
+    margin-top: 15px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    padding: 12px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+.logout-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+.btn-main-logout {
+    background: #e85111; 
+    color: white; 
+    max-width: 400px; 
+    width: 100%; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-main-logout:hover {
+    background: #c7430d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+#db_footer { 
+    background: linear-gradient(135deg, #505160, #0f1e6e); 
+    color: rgb(255, 255, 255); 
+    
+}
+.footer-top { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 30px 40px; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    gap: 20px; 
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; 
+}
+
+.social-icons img { 
+    width: 26px; 
+    height: auto;
+    margin-left: 0; 
+    transition: transform 0.2s ease;
+}
+.social-icons img:hover {
+    transform: scale(1.1); 
+}
+.footer-main { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 50px; 
+    padding: 40px; 
+    justify-content: space-around; 
+}
+.footer-logo { 
+    width: 140px; 
+    height: auto; 
+    align-self: flex-start; 
+}
+.footer-col h6 { 
+    margin-bottom: 15px; 
+    font-size: 18px; 
+    border-bottom: 2px solid #e85111; 
+    display: inline-block; 
+}
+.footer-col p { 
+    margin-bottom: 8px; 
+}
+.footer-col a { 
+    color: #ffffff; 
+    text-decoration: none; 
+    
+    
+}
+.footer-bottom { 
+    text-align: center;
+    background: #1a1a1a; 
+    padding: 15px; 
+    font-size: 14px; 
 }
