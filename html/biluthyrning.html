@@ -120,15 +120,6 @@
             overlay.classList.remove("show");
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const isLoggedIn = localStorage.getItem("isLoggedIn");
-            const loginLink = document.querySelector('a[href="../html/bil_login.html"]');
-            if (isLoggedIn === "true" && loginLink) {
-                loginLink.querySelector('span').innerText = "My Account";
-                loginLink.href = "../html/profile.html"; 
-            }
-        });
-    </script>
+    <script src="../js/auth.js"></script>
 </body>
 </html>

@@ -48,7 +48,7 @@ switch ($action) {
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id']; // Lagrar inloggning
             $_SESSION['username'] = $user['username'];
 
@@ -65,6 +65,7 @@ switch ($action) {
             "username" => $_SESSION['username'] ?? null
         ]);
     break;
+    
 
     case 'logout' :
         session_destroy();
