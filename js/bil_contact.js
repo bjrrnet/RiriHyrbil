@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch('../api.php?action=submitRequest', {
+            const response = await fetch('../public/api.php?action=submitRequest', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
