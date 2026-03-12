@@ -105,6 +105,19 @@ body {
     cursor: pointer;
     accent-color: #467084; 
 }
+#message-area {
+    display: none;
+    padding: 15px;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.form-instruction {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
 
 
 .card-footer {

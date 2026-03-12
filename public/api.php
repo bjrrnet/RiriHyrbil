@@ -181,6 +181,26 @@ switch ($action) {
             echo json_encode(["success" => false, "message" => "Booking not found"]);
         }
         break;
+    case 'submitRequest':
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(["success" => false, "message" => "Please login first"]);
+            break;
+        }
+
+        $subject = $data['subject'] ?? null;
+        $message = $data['message'] ?? null;
+
+        if (!$subject || !$message) {
+            echo json_encode(["success" => false, "message" => "All fields are required"]);
+            break;
+        }
+
+        $stmt = $pdo->prepare("INSERT INTO requests (user_id, subject, message) VALUES (?, ?, ?)");
+        $result = $stmt->execute([$_SESSION['user_id'], $subject, $message]);
+
+        echo json_encode(["success" => $result]);
+        break;
 
     case 'register':
         $username = $data['username'];
@@ -189,7 +209,6 @@ switch ($action) {
         $email = $data['email'];
         $password_hash = password_hash($data['password'], PASSWORD_DEFAULT); 
 
-        // Kolla efter existerande mail eller användarnamn.
         $tjeck = $pdo->prepare("SELECT id FROM users WHERE username = ?");
         $tjeck->execute([$username]);
         if ($tjeck->fetch()) {

@@ -1,0 +1,147 @@
+
+#bilix-logo { 
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 90px;
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 0 40px;
+    background-color: transparent; 
+}
+#bilix-logo img { 
+    height: 110px; 
+    width: auto; 
+    display: block; 
+    object-fit: contain; 
+}
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+.contact-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px); 
+    border-radius: 20px; 
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+}
+
+.card-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.request-item {
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    border-left: 6px solid #3498db;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    transition: transform 0.2s ease; 
+}
+
+.request-item:hover {
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.request-subject {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.request-message {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #5d6d7e;
+    background: #fcfcfc;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.request-date {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #a0aec0;
+    text-align: right;
+    font-style: italic;
+}
+
+.btn-next {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background: #2980b9;
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.footer-main { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 50px; 
+    padding: 40px; 
+    justify-content: space-around; 
+}
+.footer-logo { 
+    width: 140px; 
+    height: auto; 
+    align-self: flex-start; 
+}
+.footer-col h6 { 
+    margin-bottom: 15px; 
+    font-size: 18px; 
+    border-bottom: 2px solid #e85111; 
+    display: inline-block; 
+}
+.footer-col p { 
+    margin-bottom: 8px; 
+}
+.footer-col a { 
+    color: #ffffff; 
+    text-decoration: none; 
+    
+    
+}
+.footer-bottom { 
+    text-align: center;
+    background: #1a1a1a; 
+    padding: 15px; 
+    font-size: 14px; 
+}
