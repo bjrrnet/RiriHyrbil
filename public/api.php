@@ -12,7 +12,7 @@ switch ($action) {
 
     // GET /api.php?action=bilar
     case 'bilar' :
-    	$stmt = $pdo->query("SELECT * FROM bilar");
+    	$stmt = $pdo->query("SELECT * FROM cars");
     	$bilar = $stmt->fetchAll(PDO::FETCH_ASSOC);	
 //      https://www.php.net/manual/en/pdo.constants.fetch-modes.php
         echo json_encode($bilar);
@@ -49,7 +49,7 @@ switch ($action) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id']; // Lagrar inloggning
+            $_SESSION['user_id']  = $user['id']; // Lagrar inloggning
             $_SESSION['username'] = $user['username'];
 
             echo json_encode(["success" => true]);
@@ -71,51 +71,37 @@ switch ($action) {
         echo json_encode(["success" => true]);
     break;
 
-    case 'changeName':
+    case 'updateUser':
         if (!isset($_SESSION['user_id'])) {
             http_response_code(401);
-            echo json_encode(["success" => false, message => "Not logged in."]);
+            echo json_encode(["success" => false, "message" => "Not logged in."]);
             break;
         }
 
-        $firstName  = $data['first_name'] ?? null;
-        $lastName   = $data['last_name'] ?? null;
+        $updateable = ['first_name', 'last_name', 'email', 'phone_number']; // Säkerhetsåtgärd, tänker jag mig? Kolla upp om jag ens tänkt rätt om tid finnes.
+        $fields     = [];
+        $val        = [];
 
-        if (!firstName || !lastName) {
-            echo json_encode(["success" => false, message => "Both first and last name required"]);
-            break;
+        // För att kunna pussla ihop ett stmt senare, med den datan vi får, så allt ska få plats i ett case, bygger vi upp en lista. Funkar bäst på engelska, fields och field. Svenska blir fält och fält.
+        foreach ($updateable as $field) {
+            if (isset($data[$field]) && $data[field] !== '') {      // Så vi skippar tomma fält
+                $fields[] = "$field = ?";
+                $val[]    = $data[field];
+            }
         }
 
-        $stmt     = $pdo->prepare("UPDATE users SET first_name = ?, last_name = ? WHERE id = ?");
-        $response = $stmt->execute([$firstName, $lastName, $_SESSION['user_id']]);
-        echo json_decode(["success" =>  $response]);
+        //Lösenordshantering separat
+        if (!empty($data['password'])) {
+            $fields[] = "password = ?";
+            $val[]    = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+
+        $val[]     = $_SESSION['user_id'];
+        $stmt      = $pdo->prepare("UPDATE users SET " . implode(', ', $fields) . " WHERE id = ?");     // Vi använder implode för att pussla ihop den, med kommatecken
+        $result    = $stmt->execute($val);
+        echo json_encode(["success", $result]);
         break;
 
-    case 'changeEmail':
-        if (!isset($_SESSION['user_id'])) {
-            http_response_code(401);
-            echo json_encode(["success" => false, message => "You need to be logged in."]);
-            break;
-        }
-
-        $stmt       = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $response   = $stmt->execute([$email, $_SESSION['user_id']]);
-        echo json_decode(["success" => $response]);
-        break;
-    
-    case 'changePhoneNr':
-        if (!isset($_SESSION['user_id'])) {
-            http_response_code(401);
-            echo json_encode(["success" => false, message => "Both first and last name required"]);
-            break;
-        }
-
-        $stmt       = $pdo->prepare("UPDATE users SET phone_number = ? WHERE id = ?");
-        $response   = $stmt->execute([$email, $_SESSION['user_id']]);
-        echo json_decode(["success" => $response]);
-        break;
-
-    case 'change':
 
     case 'book':
         if (!isset($_SESSION['user_id'])) {
@@ -134,11 +120,17 @@ switch ($action) {
             break;
         }
 
-        $stmt = $pdo->prepare("
-            INSERT INTO bookings (user_id, car_id, start_date, end_date) VALUES (?, ?, ?, ?)
+        $checkAvailable = $pdo->prepare("
+                SELECT id FROM rentals WHERE car_id = ? AND start_date < ? AND end_date > ?
         ");
-        $stmt->execute([$_SESSION['user_id'], $car_id, $start_date, $end_date]);
-        echo json_encode(["success" => true, "booking_id" => $pdo->lastInsertId()]);
+        $checkAvailable->execute([$car_id, $end_date, $start_date]); // Detta ÄR rätt ordning, pga ordningen i våran query i preparen.
+
+        // Vet ej vad som händer om startdatum är större än slutdatum, undersök om tid finnes.
+        $stmt = $pdo->prepare("
+            INSERT INTO rentals (user_id, car_id, start_date, end_date) VALUES (?, ?, ?, ?)
+        ");
+        $result = $stmt->execute([$_SESSION['user_id'], $car_id, $start_date, $end_date]);
+        echo json_encode(["success" => $result, "booking_id" => $pdo->lastInsertId()]);
         break;
 
     case 'myBookings':
@@ -150,7 +142,7 @@ switch ($action) {
     
         $stmt = $pdo->prepare("
             SELECT b.*, c.model, c.brand FROM rentals b
-            JOIN bilar c ON b.car_id = c.id WHERE b.user_id = ?
+            JOIN cars c ON b.car_id = c.id WHERE b.user_id = ?
         ");
         $stmt->execute([$_SESSION['user_id']]);
         echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
