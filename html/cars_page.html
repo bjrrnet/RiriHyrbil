@@ -34,9 +34,9 @@
         </div>
 
         <div id="menu-options" class="hidden">
-            <a href="nyheter.html">Nyheter</a>
+            <a href="../html/news.html">News</a>
             <a href="../html/about_bilix.html">About Blix</a>
-            <a href="cars.html">Our Cars</a>
+            <a href="../html/all_cars.html">Our Cars</a>
             <a href="../html/bil_contact.html">Contact</a>
             <a href="../html/bil_login.html">Log In</a>
         </div>
@@ -125,21 +125,7 @@
             © 2026 Bilix Company
         </div>
     </footer>
-    <script>
-        const hamburger = document.getElementById("hamburger-menu");
-        const sideMenu = document.getElementById("menu-options");
-        const overlay = document.getElementById("overlay");
-
-        hamburger.addEventListener("click", () => {
-            sideMenu.classList.toggle("show");
-            overlay.classList.toggle("show");
-        });
-
-        overlay.addEventListener("click", () => {
-            sideMenu.classList.remove("show");
-            overlay.classList.remove("show");
-        });
-    </script>
+    <script src="../js/menu.js"></script>
     <script src="../js/auth.js"></script>
 
 </body>

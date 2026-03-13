@@ -41,9 +41,37 @@ body {
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 30px;              
+    gap: 30px;
+    justify-content: flex-end;              
+}
+.nav-center {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center;
 }
 
+.nav-center ul {
+    list-style: none;
+    display: flex;
+    gap: 25px; 
+    margin: 0;
+    padding: 0;
+}
+
+.nav-center ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.nav-center ul li a:hover {
+    opacity: 0.7;
+}
+.nav-left, .nav-right {
+    min-width: 150px; 
+}
 .icon-item {
     display: flex;
     flex-direction: column; 

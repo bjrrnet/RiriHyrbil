@@ -28,5 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error fetching bookings:", error);
         wrapper.innerHTML = "<p>Error loading bookings.</p>";
     });
-
+    
 });
+document.getElementById('logout-btn-profile').addEventListener('click', function() {
+        fetch('../public/api.php?action=logout')
+            .then(() => {
+                window.location.href = '../html/biluthyrning.html';
+            });
+    });

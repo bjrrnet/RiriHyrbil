@@ -41,9 +41,37 @@ body {
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 30px;              
+    gap: 30px;
+    justify-content: flex-end;              
+}
+.nav-center {
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center;
 }
 
+.nav-center ul {
+    list-style: none;
+    display: flex;
+    gap: 25px; 
+    margin: 0;
+    padding: 0;
+}
+
+.nav-center ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.nav-center ul li a:hover {
+    opacity: 0.7;
+}
+.nav-left, .nav-right {
+    min-width: 150px; 
+}
 .icon-item {
     display: flex;
     flex-direction: column; 
@@ -66,7 +94,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Main Container */
 .bookings-container {
     max-width: 1000px;
     margin: 40px auto;
@@ -85,7 +112,6 @@ body {
     color: #0f1e6e;
 }
 
-/* Booking Cards */
 .booking-card-active {
     background: white;
     display: flex;
@@ -107,7 +133,6 @@ body {
     font-weight: bold;
 }
 
-/* Buttons */
 .booking-actions {
     display: flex;
     justify-content: center;
@@ -130,6 +155,45 @@ body {
 .btn-orange:hover {
     background-color: #bf420d;
     transform: translateY(-2px);
+}
+
+.btn-main-logout {
+    background: #e85111; 
+    color: white; 
+    width: 100%; 
+    border: none; 
+    margin-top: 15px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    padding: 12px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+.logout-section {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+.btn-main-logout {
+    background: #e85111; 
+    color: white; 
+    max-width: 400px; 
+    width: 100%; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-main-logout:hover {
+    background: #c7430d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 

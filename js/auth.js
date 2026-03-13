@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 link.addEventListener("click", function(e){
                     e.preventDefault();
-                    window.location.href = "../html/profile.html";
+                    window.location.href = "../html/my_bookings.html";
                 });
 
             });
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 heroLoginBtn.addEventListener("click", function(e){
                     e.preventDefault();
-                    window.location.href = "../html/profile.html";
+                    window.location.href = "../html/my_bookings.html";
                 });
             }
 
