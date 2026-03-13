@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Bilix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../html/social/head.png?v=2">
     <link rel="stylesheet" href="../css/biluthyrning.css">
 </head>
 <body class="headside-bgColor">
@@ -11,7 +12,7 @@
         <div class="nav-left">
             <div id="hamburger-menu">
                 <img src="../html/social/main-menu.png" alt="Menu logo" width="30">
-                <span class="menu-text">Meny</span>
+                <span class="menu-text">Menu</span>
             </div>
             <div id="bilix-logo">
                 <a href="biluthyrning.html">
@@ -23,80 +24,49 @@
         <div class="nav-right">
             <a href="../html/bil_login.html" class="icon-item">
                 <img src="../html/social/user-icon.png" alt="User" >
-                <span>Logga in</span>
+                <span>Log In</span>
             </a>
 
-            <a href="cart.html" class="icon-item">
+            <a href="../html/cars_page.html" class="icon-item">
                 <img src="../html/social/boka.png" alt="Boka">
-                <span class="badge">0</span>
-                <span>Boka bil</span>
+                <span>Book Car</span>
             </a>
         </div>
 
         <div id="menu-options" class="hidden">
             <a href="nyheter.html">Nyheter</a>
-            <a href="omoss.html">Om Oss</a>
-            <a href="cars.html">Cars Page</a>
+            <a href="../html/about_bilix.html">About Blix</a>
+            <a href="cars.html">Our Cars</a>
             <a href="tillhor.html">Tillhör</a>
-            <a href="kontakta.html">Kontakta</a>
-            <a href="../html/bil_login.html">Login</a>
+            <a href="../html/bil_contact.html">Contact</a>
+            <a href="../html/bil_login.html">Log In</a>
         </div>
         <div id="overlay"></div>
     </header>
 
     <section id="db_mainWall">
         <div id="db_mainCaption">
-            <h1 id="db_h1">Bilix</h1>
-            <p id="db_p">Online Car Rental Service</p>
+            <h1 id="db_h1">Bilix, a smarter car rental!</h1>
+            
+            <ul class="hero-list">
+                <li>- Pick up and drop off 24/7</li>
+                <li>- At parking spaces near you</li>
+                <li>- Price packages from one hour, day, week... whatever suits you.</li>
+            </ul>
+
+            <p class="hero-subtext">For everyday life, work and travel!</p>
+            <p class="hero-price">From 65 kr/hr*</p>
+
+            <div class="hero-buttons">
+                <a href="../html/bil_login.html" class="btn-main btn-white">LOG IN</a>
+                <a href="../html/cars_page.html" class="btn-main btn-orange">BOOK CAR</a>
+            </div>
+            
         </div>
     </section>
 
-    <section class="sectionArea">
-        <div class="featuresTop">
-            <h2 id="db_newCarReviews">New Car Reviews</h2>
-            <p>Our expert reviewers report back with the latest</p>
-        </div>
-        
-        <div class="bilix-car-grid">
-            <div class="bilix-car-item">
-                <h3>BMW X5</h3>
-                <p>Premium SUV</p>
-            </div>
-            <div class="bilix-car-item">
-                <h3>Audi A6</h3>
-                <p>Luxury Sedan</p>
-            </div>
-            <div class="bilix-car-item">
-                <h3>Tesla Model 3</h3>
-                <p>Electric Future</p>
-            </div>
-        </div>
-    </section>
-    <section class="bilix-booking-section">
-        <div class="bilix-search-bar">
-            <input type="text" placeholder="Pick-up location">
-            <input type="date">
-            <button class="search-btn">Search</button>
-        </div>
-        <div class="bilix-filters">
-            <button class="filter-btn active">All Cars</button>
-            <button class="filter-btn">Electric</button>
-            <button class="filter-btn">SUV</button>
-            <button class="filter-btn">Luxury</button>
-        </div>
-    </section>
 
     <footer id="db_footer">
-        <div class="footer-top">
-            <span>Get connected with us on social networks :</span>
-            <div class="social-icons">
-                <a href="#"><img src="../html/social/google.png"></a>
-                <a href="#"><img src="../html/social/facebook.png"></a>
-                <a href="#"><img src="../html/social/instagram.png"></a>
-                <a href="#"><img src="../html/social/twitter.png"></a>
-                <a href="#"><img src="../html/social/linkedin.png"></a>
-            </div>
-        </div>
 
         <div class="footer-main">
             <img src="../html/social/car_logo.png" class="footer-logo">
@@ -112,7 +82,7 @@
             </div>
             <div class="footer-col">
                 <h6>Useful links</h6>
-                <p><a href="#">Help</a></p>
+                <p><a href="../html/bil_contact.html">Contact</a></p>
                 <p><a href="#">Rating</a></p>
             </div>
             <div class="footer-col">
@@ -121,8 +91,18 @@
                 <p>Phone: +46 735 868 805</p>
             </div>
         </div>
+        <div class="footer-top">
+            <span>Get connected with us on social networks </span>
+            <div class="social-icons">
+                <a href="#"><img src="../html/social/google.png"></a>
+                <a href="#"><img src="../html/social/facebook.png"></a>
+                <a href="#"><img src="../html/social/instagram.png"></a>
+                <a href="#"><img src="../html/social/twitter.png"></a>
+                <a href="#"><img src="../html/social/linkedin.png"></a>
+            </div>
+        </div>
         <div class="footer-bottom">
-            © 2026 Alpha X Software Company
+            © 2026 Bilix Company
         </div>
     </footer>
 
@@ -139,6 +119,16 @@
         overlay.addEventListener("click", () => {
             sideMenu.classList.remove("show");
             overlay.classList.remove("show");
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+            const loginLink = document.querySelector('a[href="../html/bil_login.html"]');
+            if (isLoggedIn === "true" && loginLink) {
+                loginLink.querySelector('span').innerText = "My Account";
+                loginLink.href = "../html/profile.html"; 
+            }
         });
     </script>
 </body>

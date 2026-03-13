@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; 
+}
+
+
+#bilix-logo { 
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 90px;
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 0 40px;
+    background-color: transparent; 
+}
+#bilix-logo img { 
+    height: 110px; 
+    width: auto; 
+    display: block; 
+    object-fit: contain; 
+}
+
+.contact-wrapper {
+    background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../html/social/Gemini_Generated_Image_n26t8gn26t8gn26t.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: calc(100vh - 90px - 400px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+
+.contact-card {
+    background: rgba(89, 89, 89, 0.7); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    width: 100%;
+    max-width: 550px;
+    padding: 40px;
+    border-radius: 30px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.card-subtitle {
+    color: #ffffff;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.card-subtitle a {
+    color: #4a7c92;
+    text-decoration: underline;
+}
+
+.form-instruction {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.asterisk {
+    color: #e85111;
+    margin-right: 4px;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.radio-item input {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #467084; 
+}
+
+
+.card-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-next {
+    background-color: #313a6e; 
+    color: white;
+    border: none;
+    padding: 10px 45px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-next:hover {
+    background-color: #e85111;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+#db_footer { 
+    background: linear-gradient(135deg, #505160, #0f1e6e); 
+    color: rgb(255, 255, 255); 
+    
+}
+.footer-top { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 30px 40px; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    gap: 20px; 
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; 
+}
+
+.social-icons img { 
+    width: 26px; 
+    height: auto;
+    margin-left: 0; 
+    transition: transform 0.2s ease;
+}
+.social-icons img:hover {
+    transform: scale(1.1); 
+}
+.footer-main { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 50px; 
+    padding: 40px; 
+    justify-content: space-around; 
+}
+.footer-logo { 
+    width: 140px; 
+    height: auto; 
+    align-self: flex-start; 
+}
+.footer-col h6 { 
+    margin-bottom: 15px; 
+    font-size: 18px; 
+    border-bottom: 2px solid #e85111; 
+    display: inline-block; 
+}
+.footer-col p { 
+    margin-bottom: 8px; 
+}
+.footer-col a { 
+    color: #ffffff; 
+    text-decoration: none; 
+    
+    
+}
+.footer-bottom { 
+    text-align: center;
+    background: #1a1a1a; 
+    padding: 15px; 
+    font-size: 14px; 
+}

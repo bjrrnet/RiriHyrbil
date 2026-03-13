@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Bilix | About Bilix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png"  href="../html/social/head.png?v=2">
-    <link rel="stylesheet" href="../css/cars_page.css">
-    <title>Bilix | Cars</title>
+    <link rel="icon" type="image/png" href="../html/social/head.png?v=2">
+    <link rel="stylesheet" href="../css/about_bilix.css">
 </head>
 <body>
     <header id="db_navbar">
@@ -27,68 +27,57 @@
                 <span>Log In</span>
             </a>
 
-            <a href="cart.html" class="icon-item">
+            <a href="../html/cars_page.html" class="icon-item">
                 <img src="../html/social/boka.png" alt="Boka">
                 <span>Book Car</span>
             </a>
         </div>
 
         <div id="menu-options" class="hidden">
-            <a href="nyheter.html">Nyheter</a>
-            <a href="../html/about_bilix.html">About Blix</a>
+            <a href="nyheter.html">News</a>
+            <a href="omoss.html">About Bilix</a>
             <a href="cars.html">Our Cars</a>
-            <a href="tillhor.html">Tillhör</a>
+            <a href="tillhor.html">Affiliates</a>
             <a href="../html/bil_contact.html">Contact</a>
             <a href="../html/bil_login.html">Log In</a>
         </div>
         <div id="overlay"></div>
     </header>
 
-    <section class="sectionArea">
-        <div class="featuresTop">
-            <h2 id="db_newCarReviews">New Car Reviews</h2>
-            <p>Our expert reviewers report back with the latest</p>
-        </div>
-        
-        <div class="bilix-car-grid">
-            <div class="bilix-car-item">
-                <h3>BMW X5</h3>
-                <p>Premium SUV</p>
+    <main>
+        <section id="db_mainWall">
+            <div id="db_mainCaption">
+                <h1 id="db_h1">Mobility for everyone.</h1>
+                <p id="db_p">Simple, sustainable, and flexible car sharing by Bilix.</p>
             </div>
-            <div class="bilix-car-item">
-                <h3>Audi A6</h3>
-                <p>Luxury Sedan</p>
-            </div>
-            <div class="bilix-car-item">
-                <h3>Tesla Model 3</h3>
-                <p>Electric Future</p>
-            </div>
-        </div>
-    </section>
-    <section class="bilix-booking-section">
-        <div class="bilix-search-bar">
-            <select name="location" class="search-input">
-                <option value="" disabled selected>Choose a place</option>
-                <option value="goteborg">Göteborg</option>
-                <option value="stockholm">Stockholm</option>
-                <option value="malmo">Malmö</option>
-            </select>
-            
-            <input type="date" class="search-input" placeholder="Från">
-            <input type="date" class="search-input" placeholder="Till">
-            
-            <button class="search-btn">Search</button>
-        </div>
-        <div class="bilix-filters">
-            <button class="filter-btn active">All Cars</button>
-            <button class="filter-btn">Electric</button>
-            <button class="filter-btn">SUV</button>
-            <button class="filter-btn">Luxury</button>
-        </div>
-    </section>
+        </section>
 
+        <section class="about-content">
+            <div class="container">
+                <div class="text-block">
+                    <h2>What is Bilix?</h2>
+                    <p>Bilix is a modern car-sharing service designed to give you all the benefits of having a car without the hassle of owning one. We believe in a future where mobility is shared, smart, and available to everyone at the touch of a button.</p>
+                </div>
+
+                <div class="grid-section">
+                    <div class="grid-item">
+                        <h3>Simple & Digital</h3>
+                        <p>Everything is handled in our app. From booking to unlocking the car, your journey starts and ends with your smartphone.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Flexible Travel</h3>
+                        <p>Whether you need a car for an hour, a day, or a full weekend, Bilix adapts to your schedule and your needs.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Sustainable Future</h3>
+                        <p>By sharing cars, we reduce the number of vehicles on the road, lowering CO2 emissions and creating more space in our cities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
     <footer id="db_footer">
-
         <div class="footer-main">
             <img src="../html/social/car_logo.png" class="footer-logo">
             <div class="footer-col">
@@ -123,9 +112,10 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 Bilix Company
+            © 2026 Bilix Company 
         </div>
     </footer>
+
     <script>
         const hamburger = document.getElementById("hamburger-menu");
         const sideMenu = document.getElementById("menu-options");
@@ -141,6 +131,5 @@
             overlay.classList.remove("show");
         });
     </script>
-
 </body>
 </html>
