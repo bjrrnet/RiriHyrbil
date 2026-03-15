@@ -1,7 +1,7 @@
 async function loadRequests() {
             const container = document.getElementById('requests-list');
             try {
-                const response = await fetch('../api.php?action=getMyRequests');
+                const response = await fetch('../api2.php?action=getMyRequests');
                 const data = await response.json();
 
                 if (response.status === 401) {
