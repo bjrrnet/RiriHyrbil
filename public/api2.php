@@ -15,7 +15,7 @@ switch ($action) {
     break;
 
     case 'login':
-        $email = $data['email'] ?? '';
+        $email = $data['email'] ? trim($data['email']) : '';
         $password = $data['password'] ?? '';
 
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
@@ -52,6 +52,23 @@ switch ($action) {
             echo json_encode(["success" => false, "message" => "Email is already registered"]);
         }
     break;
+    case 'forgot_password':
+        $email = isset($data['email']) ? trim($data['email']) : '';
+
+        if (empty($email)) {
+            echo json_encode(["success" => false, "message" => "E-post krävs"]);
+            break;
+        }
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+        if ($user) {
+            echo json_encode(["success" => true, "message" => "Instruktioner har skickats."]);}
+        else {echo json_encode(["success" => true, "message" => "Instruktioner har skickats."]);
+        }
+    break;
+
+
 
     case 'book':
         if (!isset($_SESSION['user_id'])) {
