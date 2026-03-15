@@ -16,17 +16,12 @@
     <div class="card">
         <div class="right-side">
             <h4>Create Bilix an Account!</h4>
-            <form>
+            <form id="registerForm"> 
                 <div class="form-row">
-                    <input type="text" placeholder="User Name" name="username" id="txtUserName" required>
+                    <input type="text" placeholder="Full Name" name="full_name" id="txtFullName" required style="width: 100%;">
                 </div>
                 <div class="form-row">
-                    <input type="text" placeholder="First Name" name="first_name" id="txtFName" required>
-                    <input type="text" placeholder="Last Name" name="last_name" id="txtLName" required>
-                </div>
-
-                <div class="form-row">
-                    <input type="email" placeholder="Email Address" name="email" id="txtEmail" required>
+                    <input type="email" placeholder="Email Address" name="email" id="txtEmail" required style="width: 100%;">
                 </div>            
                 <div class="form-row">
                     <input type="password" placeholder="Password" name="password" id="txtPassword" required>
@@ -36,15 +31,17 @@
                     Register Account
                 </button>
             </form>
-            <div class="text-center">
-                <a href="bil_forgottenPassword.html">Forgot Password?</a>
-            </div>
-            <div class="text-center">
-                <a href="bil_login.html">Already have an account? Login!</a>
-            </div>
         </div>
+
+                <div class="text-center">
+                    <a href="../html/bil_forgottenPassword.html">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                    <a href="../html/bil_login.html">Already have an account? Login!</a>
+                </div>
     </div>
-<script src="../js/bil_register.js"></script>
+    
+    <script src="../js/bil_register.js"></script>
 
 </body>
 </html>

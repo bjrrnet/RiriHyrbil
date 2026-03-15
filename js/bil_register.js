@@ -1,15 +1,13 @@
 document.getElementById('btn_Register').addEventListener('click', function() {
     const userData = {
-        username: document.getElementById('txtUserName').value,
-        first_name: document.getElementById('txtFName').value,
-        last_name: document.getElementById('txtLName').value,
+        username: document.getElementById('txtFullName').value,
         email: document.getElementById('txtEmail').value,
         password: document.getElementById('txtPassword').value
     };
 
     const confirmPassword = document.getElementById('txtConfirmPassword').value;
     
-    if (!userData.username ||!userData.first_name ||!userData.last_name || !userData.email ||!userData.password || !confirmPassword) {
+    if (!userData.full_name || !userData.email ||!userData.password || !confirmPassword) {
         alert("All fields required.");
         return;
     }
@@ -19,7 +17,7 @@ document.getElementById('btn_Register').addEventListener('click', function() {
         return; 
     }
 
-    fetch('../public/api.php?action=register', {
+    fetch('../public/api2.php?action=register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
