@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <title>Bilix | My Requests</title>
+    <link rel="icon" type="image/png"  href="../html/social/head.png?v=2">
+    <link rel="stylesheet" href="../css/MyRequests.css">
+</head>
+<body>
+    <header id="db_navbar">
+        <div class="nav-left">
+            <div id="bilix-logo">
+                <a href="biluthyrning.html">
+                    <img src="../html/social/car_logo.png" alt="Bilix logo">
+                </a>    
+            </div>
+        </div>
+        <nav class="nav-center">
+            <ul>
+                <li><a href="../html/MyRequests.html">My Requests</a></li>
+                <li><a href="../html/profile.html">My Profile</a></li>
+                <li><a href="../html/my_bookings.html">My Bookings</a></li>
+                <li><a href="../html/bil_contact.html">Contact </a></li>
+            </ul>
+        </nav>        
+        <div class="nav-right">
+            <a href="../html/bil_login.html" class="icon-item">
+                <img src="../html/social/user-icon.png" alt="User" >
+                <span>Log In</span>
+            </a>
+        </div>
+    </header>
+    <main class="container">
+        <div class="content-header">
+            <h2 class="title-underline">My Requests</h2>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="requests-table">
+                <thead>
+                    <tr>
+                        <th>Case Number <span class="sort-icon">▼</span></th>
+                        <th>Subject <span class="sort-icon">▼</span></th>
+                        <th>Message <span class="sort-icon">▼</span></th>
+                        <th>Created At <span class="sort-icon">▲</span></th>
+                    </tr>
+                </thead>
+                <tbody id="requestsBody">
+                    <tr>
+                        <td colspan="4" class="loading-text">Loading requests...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
+    <footer id="db_footer">
+
+        <div class="footer-main">
+            <img src="../html/social/car_logo.png" class="footer-logo">
+            <div class="footer-col">
+                <h6>Bilix</h6>
+                <p>Online car rental service.</p>
+            </div>
+            <div class="footer-col">
+                <h6>Products</h6>
+                <p><a href="#">Chevrolet</a></p>
+                <p><a href="#">BMW</a></p>
+                <p><a href="#">Dodge</a></p>
+            </div>
+            <div class="footer-col">
+                <h6>Useful links</h6>
+                <p><a href="../html/bil_contact.html">Contact</a></p>
+            </div>
+            <div class="footer-col">
+                <h6>Contact</h6>
+                <p>Email: bilix@gmail.com</p>
+                <p>Phone: +46 735 868 805</p>
+            </div>
+        </div>
+        <div class="footer-top">
+            <span>Get connected with us on social networks </span>
+            <div class="social-icons">
+                <a href="#"><img src="../html/social/google.png"></a>
+                <a href="#"><img src="../html/social/facebook.png"></a>
+                <a href="#"><img src="../html/social/instagram.png"></a>
+                <a href="#"><img src="../html/social/twitter.png"></a>
+                <a href="#"><img src="../html/social/linkedin.png"></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 Bilix Company
+        </div>
+    </footer>
+    <script src="../js/auth.js"></script>
+    <script src="../js/MyRequests.js"></script>
+
+
+</body>
+</html>
