@@ -1,12 +1,12 @@
 document.getElementById('btnResetPassword').addEventListener('click', function() {
-    const email = document.getElementById('txtEmail').value;
-
-    if (!email.includes('@')) {
+    const emailInput = document.getElementById('txtEmail');
+    const email = emailInput.value.trim();
+    if (!email || !email.includes('@')) {
         alert("Enter a valid email address.");
         return;
     }
 
-    fetch('../public/api.php?action=forgot_password', {
+    fetch('../public/api2.php?action=forgot_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email })
