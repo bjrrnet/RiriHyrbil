@@ -67,7 +67,60 @@ switch ($action) {
         else {echo json_encode(["success" => true, "message" => "Instruktioner har skickats."]);
         }
     break;
+    case 'checkLogin':
+        echo json_encode([
+            "loggedIn" => isset($_SESSION['user_id']),
+            "username" => $_SESSION['full_name'] ?? null
+            ]);
+    break;
+    case 'getUserDetails':
 
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false]);
+        break;
+    }
+
+    $stmt = $pdo->prepare("SELECT full_name, email, phone FROM users WHERE id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch();
+
+    echo json_encode([
+        "success" => true,
+        "data" => $user
+    ]);
+
+    break;
+    case 'updatePhone':
+
+        if (!isset($_SESSION['user_id'])) {
+            echo json_encode(["success" => false]);
+            break;
+        }
+
+        $phone = $data['phone'] ?? '';
+
+        $stmt = $pdo->prepare("UPDATE users SET phone = ? WHERE id = ?");
+        $result = $stmt->execute([$phone, $_SESSION['user_id']]);
+
+        echo json_encode(["success" => $result]);
+
+    break;
+    case 'getMyRequests':
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode([]);
+            break;
+        }
+
+        $stmt = $pdo->prepare("SELECT subject, message, created_at 
+                            FROM requests 
+                            WHERE user_id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+
+        echo json_encode($stmt->fetchAll());
+
+    break;
 
 
     case 'book':

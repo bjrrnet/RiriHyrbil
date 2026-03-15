@@ -132,108 +132,382 @@ body {
 }
 
 
-.sectionArea { 
-    padding: 80px 40px; 
-    text-align: center; 
-    background: white; 
-    color: black; 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+        }
+
+        /* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 0;
+    background: linear-gradient(135deg, #505160, #0f1e6e 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+header h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+font-weight: 700;
 }
 
-.featuresTop h2 { 
-    color: #e85111; 
-    margin-bottom: 10px; 
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-
-.bilix-car-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-    gap: 20px; 
-    padding: 40px; 
-    max-width: 1000px; 
-    margin: 0 auto; 
+.search-section {
+    margin-bottom: 30px;
 }
 
-.bilix-car-item { 
-    background: #f4f4f4; 
-    padding: 20px; 
-    border-radius: 10px; 
-    text-align: center; 
-    color: #333; 
-    border: 1px solid #ddd; 
-}
-
-
-.bilix-booking-section {
-    max-width: 900px;
-    margin: -50px auto 40px auto;
+.search-container {
     background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    position: relative;
-    z-index: 10;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.bilix-search-bar { 
-    display: flex; 
-    gap: 10px; 
-    margin-bottom: 20px; 
-    flex-wrap: wrap; 
+.search-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 20px;
+    align-items: end;
 }
 
-.bilix-search-bar input { 
-    flex: 1; 
-    padding: 12px; 
-    border: 1px solid #ddd; 
-    border-radius: 50px; 
+.form-group {
+    display: flex;
+    flex-direction: column;
 }
 
-.search-input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    background-color: white;
-    font-size: 14px;
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
     color: #555;
-    appearance: none; 
 }
-select.search-input {
+
+.form-group input {
+    padding: 12px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-btn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #505160, #0f1e6e);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-} 
-.search-btn { 
-    padding: 12px 25px; 
-    border: none; 
-    background: #e85111; 
-    color: white; 
-    border-radius: 50px; 
-    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: fit-content;
 }
 
-.bilix-filters { 
-    display: flex; 
-    gap: 10px; 
-    justify-content: center; 
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-
-.filter-btn { 
-    padding: 8px 20px; 
-    border: 1px solid #e85111; 
-    background: transparent; 
-    color: #e85111; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    transition: 0.3s; 
+.search-btn:active {
+    transform: translateY(0);
 }
 
-.filter-btn:hover,
-.filter-btn.active { 
-    background: #e85111; 
-    color: white; 
+.filter-section {
+    margin-bottom: 30px;
 }
 
+.filter-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #505160, #0f1e6e);
+    color: white;
+    border-color: transparent;
+}
+
+.cars-section {
+    margin-bottom: 40px;
+}
+
+.cars-section h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #333;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+}
+
+.cars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.car-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.car-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.car-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    }
+
+.car-card:hover .car-image img {
+    transform: scale(1.05);
+}
+
+.car-info {
+    padding: 20px;
+}
+
+.car-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.car-details {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.car-type {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.car-category {
+    background: #f3e5f5;
+    color: #7b1fa2;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.car-specs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.spec {
+    font-size: 14px;
+    color: #666;
+}
+
+.car-price {
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.book-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #505160, #0f1e6e);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.book-btn:active {
+    transform: translateY(0);
+}
+
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.no-results p {
+    font-size: 18px;
+    color: #666;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    max-width: 300px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: slideIn 0.3s ease;
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+        }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .filter-buttons {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .cars-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .notification {
+        right: 15px;
+        left: 15px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+    padding: 30px 20px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .search-container {
+        padding: 20px;
+    }
+
+    .filter-btn {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    .car-info {
+        padding: 15px;
+    }
+
+    .car-name {
+        font-size: 1.1rem;
+        }
+
+    .price {
+        font-size: 1.3rem;
+    }
+}
 
 #db_footer { 
     background: linear-gradient(135deg, #505160, #0f1e6e); 
