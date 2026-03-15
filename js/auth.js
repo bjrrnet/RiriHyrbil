@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginLinks = document.querySelectorAll('a[href="../html/bil_login.html"]');
     const heroLoginBtn = document.querySelector('.btn-main.btn-white');
 
-    fetch("../public/api.php?action=checkLogin")
+    fetch("../public/api2.php?action=checkLogin")
     .then(response => response.json())
     .then(data => {
 
