@@ -41,7 +41,8 @@ CREATE TABLE `bookings` (
   `total_price` decimal(10,2) NOT NULL,
   `status` enum('pending','confirmed','cancelled','completed') DEFAULT 'pending',
   `notes` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `national_id` varchar(12) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -53,6 +54,7 @@ CREATE TABLE `bookings` (
 CREATE TABLE `cars` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
+  `location` varchar(100) DEFAULT NULL,
   `brand` varchar(50) NOT NULL,
   `model` varchar(50) NOT NULL,
   `year` int(11) NOT NULL,
@@ -80,6 +82,18 @@ INSERT INTO `cars` (`id`, `name`, 'location' , `brand`, `model`, `year`, `catego
 (6, 'Ford Mustang', 'Ford','Malmö', 'Mustang GT', 2022, 'sports', '145.00', 4, 'manual', 'petrol', 'https://images.unsplash.com/photo-1584345604476-8ec5e2a5e249?w=800', 'Feel the American muscle with the iconic Ford Mustang. Raw power meets classic style in this legendary pony car.', 1, '2026-03-15 01:30:36'),
 (7, 'Volkswagen Golf', 'Volkswagen', 'Stockholm' , 'Golf GTI', 2023, 'economy', '65.00', 5, 'manual', 'petrol', 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800', 'The Golf GTI strikes the perfect balance between practicality and driving pleasure. A hot hatch legend.', 1, '2026-03-15 01:30:36'),
 (8, 'Range Rover', 'Land Rover', 'Stockholm', 'Range Rover Sport', 2023, 'luxury', '189.00', 5, 'automatic', 'hybrid', 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800', 'Conquer any terrain in absolute luxury. The Range Rover Sport blends off-road capability with premium comfort.', 1, '2026-03-15 01:30:36');
+(9, 'Toyota Corolla', 'Malmö', 'Toyota', 'Corolla', 2024, 'luxury', '200.00', 5, 'automatic', 'hybrid', 'https://hips.hearstapps.com/hmg-prod/images/2024-toyota-gr-corolla-premium-exterior-107-662035ecce76c.jpg?crop=0.673xw:0.566xh;0.157xw,0.269xh&resize=1200:*', 'A globally trusted compact sedan known for reliability and low fuel consumption', 1, '2026-03-16 02:21:48'),
+(10, 'Hyundai Elantra', 'Göteborg', 'Hyundai', 'Elantra', 2025, 'luxury', '50.00', 5, 'automatic', 'petrol', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwKPonQyr7EoMDQHzltfTuhPhdIgwLoVu6ixvISCSizw&s=10', 'Modern compact sedan offering strong efficiency', 1, '2026-03-16 02:23:29'),
+(11, 'Mazda6', 'Göteborg', 'Mazda', 'Mazda6', 2023, 'luxury', '60.00', 5, 'automatic', 'petrol', 'https://hips.hearstapps.com/hmg-prod/images/2021-mazda-mazda6-carbon-edition-394-edit-1611709080.jpg?crop=0.668xw:0.564xh;0.311xw,0.400xh&resize=2048:*', 'A sporty mid-size sedan praised for engaging driving dynamics and premium interior quality.', 1, '2026-03-16 02:25:22'),
+(12, 'Nissan Leaf', 'Göteborg', 'Nissan', 'Leaf', 2024, 'electric', '70.00', 5, 'automatic', 'electric', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR61NfP9DapuM-95SipUV16Ns1gIv7HKlgVWXN-jBH60A&s=10', 'A fully electric compact hatchback known for reliability, smooth driving, and affordable entry into electric mobility.', 1, '2026-03-16 02:26:35'),
+(13, 'Tesla Model 3', 'Stockholm', 'Tesla', 'Model 3', 2024, 'electric', '300.00', 5, 'automatic', 'electric', 'https://media.carsandbids.com/cdn-cgi/image/width=2080,quality=70/39ba75f9b610a05237adc3ca976891cd48f5832c/photos/rGe22aq4-Va1cqtSEXb-(edit).jpg?t=172138681715', 'A leading electric vehicle offering long driving range, high performance acceleration, and advanced autonomous features.', 1, '2026-03-16 02:29:30'),
+(14, 'Lexus LS', 'Göteborg', 'Lexus', 'LS', 2024, 'luxury', '100.00', 5, 'automatic', 'hybrid', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBVjf9D2ijoUWEJph7E4KUUw7dR4ipj3nLcv_ela-MWrHhq7rVNKz-7X8&s=10', 'A flagship luxury sedan delivering exceptional comfort, quiet cabin refinement, and cutting-edge safety systems.', 1, '2026-03-16 02:31:47'),
+(15, 'BMW 5 Series', 'Göteborg', 'BMW', '5 Series', 2024, 'luxury', '100.00', 5, 'automatic', 'petrol', 'https://bmw.scene7.com/is/image/BMW/bmw-5-series-overview-g60-bev?wid=2560&hei=2560', 'A premium executive sedan that blends luxury comfort with sporty driving dynamics.', 1, '2026-03-16 02:31:47'),
+(16, 'Ford Bronco', 'Göteborg', 'Ford', 'Bronco', 2024, 'suv', '300.00', 5, 'manual', 'petrol', 'https://car-images.bauersecure.com/wp-images/154339/480x270/bronco_50.jpg', 'A rugged off-road SUV with advanced terrain systems and powerful turbocharged engines.', 1, '2026-03-16 02:31:47'),
+(17, 'Jeep Wrangler', 'Göteborg', 'Jeep', 'Wrangler', 2024, 'suv', '400.00', 5, 'automatic', 'hybrid', 'https://imgd.aeplcdn.com/1920x1080/n/cw/ec/174975/wrangler-facelift-exterior-left-front-three-quarter.jpeg?isig=0&q=80&q=80', 'An iconic off-road SUV built for extreme terrain capability and adventure driving.', 1, '2026-03-16 02:33:43'),
+(18, 'Volvo XC90', 'Stockholm', 'Volvo', 'XC90', 2024, 'suv', '300.00', 7, 'automatic', 'hybrid', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9N3VtQQ7Egwbskles0X4BN1YnE1OcTigOKbUMteexGg&s=10', 'A premium Scandinavian luxury SUV known for exceptional safety technology, minimalist interior design, and strong hybrid performance.', 1, '2026-03-16 02:33:43'),
+(19, 'Porsche 911 Carrera', 'Malmö', 'Porsche', '911 Carrera', 2024, 'luxury', '200.00', 4, 'automatic', 'petrol', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj58U6vCvlpjOXZdJYFzwFrVH8OH2lvrBsE3HvpYHBPu1sQfCpTRh3wT8&s=10', 'An iconic high-performance sports car known for exceptional handling, precision engineering, and everyday usability.', 1, '2026-03-16 02:33:43'),
+(20, 'Toyota GR Supra', 'Göteborg', 'Toyota', 'GR Supra', 2024, 'electric', '100.00', 2, 'manual', 'petrol', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTgTTNIVsi_iZyiDQU1yi4fnH7i9ReNgJGpwrhlEgzgo8cYVniqyvgL7U&s=10', 'A modern revival of the legendary Supra, delivering strong turbocharged performance and agile rear-wheel-drive dynamics.', 1, '2026-03-16 02:36:24');
 
 -- --------------------------------------------------------
 
@@ -115,6 +129,7 @@ CREATE TABLE `users` (
   `phone` varchar(25) DEFAULT NULL,
   `password_hash` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp()
+  `national_id` varchar(12) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
