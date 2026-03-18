@@ -33,7 +33,7 @@
             </a>
         </div>
 
-        <div id="menu-options" class="hidden">
+                <div id="menu-options" class="hidden">
             <a href="../html/about_bilix.html">About Blix</a>
             <a href="../html/bil_contact.html">Contact</a>
             <a href="../html/bil_login.html">Log In</a>
@@ -41,7 +41,7 @@
         <div id="overlay"></div>
     </header>
 
-        <div class="container">
+    <div class="container">
         <header>
             <h1>Car Rental Reviews</h1>
             <p>Find your perfect ride</p>
@@ -52,13 +52,12 @@
                 <div class="search-form">
                     <div class="form-group">
                         <label for="location">Pickup Location</label>
-                        <select id="location">
+						<select id="location">
                             <option value="">Select City</option>
                             <option value="göteborg">Göteborg</option>
                             <option value="malmö">Malmö</option>
                             <option value="stockholm">Stockholm</option>
-                        </select>
-                    </div>
+                        </select>                    </div>
                     <div class="form-group">
                         <label for="start-date">Start Date</label>
                         <input type="date" id="start-date">
@@ -84,23 +83,21 @@
         <section class="cars-section">
             <h2>New Car Reviews</h2>
             <div class="loading" id="loading">Loading cars...</div>
-            <div class="cars-grid" id="cars-grid">
-            </div>
+            <div class="cars-grid" id="cars-grid"></div>
             <div class="no-results" id="no-results" style="display: none;">
                 <p>No cars found matching your criteria.</p>
             </div>
         </section>
     </div>
     <div id="booking-modal" class="modal">
-        <div class="modal-content">
+    <div class="modal-content">
             <h2 class="modal-title">Confirm Your Booking</h2>
             <div id="modal-car-details" class="modal-car-details">
             </div>
             <div class="modal-form">
                 <label class="modal-label">National ID Number:</label>
-               <input type="tel" id="national-id-input" class="modal-input" placeholder="Enter National ID number" maxlength="12">
-               <span id="id-error" class="error-message"></span>
-
+               <input type="tel" id="national-id-input" class="modal-input" placeholder="Enter National ID number"maxlength="12">
+                <span id="id-error" class="error-message"></span>
             </div>
 
             <button id="confirm-booking-btn" class="confirm-booking-btn">
