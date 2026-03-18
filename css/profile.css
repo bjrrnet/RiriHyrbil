@@ -158,6 +158,61 @@ body {
     font-size: 14px;
 }
 
+
+#license-status {
+    display: block;
+    padding: 8px 0;
+    font-size: 15px;
+    font-weight: 500;
+    min-height: 20px; 
+}
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-top: 8px;
+    max-width: 300px; 
+}
+
+#user-phone-number {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-right: none; 
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+    height: 40px;
+}
+
+#user-phone-number:focus {
+    border-color: #0f1e6e; 
+}
+
+#save-phone {
+    background-color: #0f1e6e; 
+    color: white;
+    border: 2px solid #0f1e6e;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    height: 40px; 
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#save-phone:hover {
+    background-color: #e85111;
+    border-color: #e85111;
+}
+
+
+
 .btn-main-logout {
     background: #e85111; 
     color: white; 
@@ -195,6 +250,48 @@ body {
     background: #c7430d;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.section-divider {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 25px 0;
+}
+
+.danger-zone {
+    border: 1px solid #ffcccc;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fffafa;
+}
+
+.danger-zone h3 {
+    color: #d9534f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.danger-zone p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #d9534f;
+    color: white;
+    box-shadow: 0 4px 8px rgba(217, 83, 79, 0.3);
 }
 
 #db_footer { 
