@@ -132,6 +132,10 @@ CREATE TABLE `users` (
   `national_id` varchar(12) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+ALTER TABLE `users` 
+ADD COLUMN `reset_token` VARCHAR(255) DEFAULT NULL AFTER `national_id`,
+ADD COLUMN `token_expires` DATETIME DEFAULT NULL AFTER `reset_token`;
+
 --
 -- Index för dumpade tabeller
 --
