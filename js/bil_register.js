@@ -1,20 +1,18 @@
 document.getElementById('btn_Register').addEventListener('click', function() {
     const userData = {
-        username: document.getElementById('txtFullName').value,
+        full_name: document.getElementById('txtFullName').value,  
         email: document.getElementById('txtEmail').value,
         password: document.getElementById('txtPassword').value
     };
-
     const confirmPassword = document.getElementById('txtConfirmPassword').value;
-    
-    if (!userData.full_name || !userData.email ||!userData.password || !confirmPassword) {
+
+    if (!userData.full_name || !userData.email || !userData.password || !confirmPassword) {
         alert("All fields required.");
         return;
     }
-
     if (userData.password !== confirmPassword) {
-        alert("Passwords do not match. Please try again.");        
-        return; 
+        alert("Passwords do not match. Please try again.");
+        return;
     }
 
     fetch('../public/api2.php?action=register', {
@@ -33,5 +31,6 @@ document.getElementById('btn_Register').addEventListener('click', function() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert("Unable to connect to the server.");});
+        alert("Unable to connect to the server.");
+    });
 });

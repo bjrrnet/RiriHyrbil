@@ -1,17 +1,24 @@
-document.getElementById('btnResetPassword').addEventListener('click', function() {
-    const emailInput = document.getElementById('txtEmail');
-    const email = emailInput.value.trim();
+document.getElementById('btnResetPassword').addEventListener('click', async function() {
+    const email = document.getElementById('txtEmail').value.trim();
+    
     if (!email || !email.includes('@')) {
         alert("Enter a valid email address.");
         return;
     }
 
-    fetch('../public/api2.php?action=forgot_password', {
+    const response = await fetch('../public/api2.php?action=forgot_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email })
-    })
-    .then(response => response.json())
-    .then(result => {
-        alert("If your email address is registered with us, you will receive a password reset link shortly.");        window.location.href = 'bil_login.html'; });
     });
+
+    const result = await response.json();
+    console.log("API result:", result);
+
+    if (result.success) {
+        alert("If your email is registered, you will receive a reset link.");
+        window.location.href = '../html/bil_login.html';
+    } else {
+        alert(result.message || "Something went wrong.");
+    }
+});
