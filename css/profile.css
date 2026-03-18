@@ -164,7 +164,7 @@ body {
     padding: 8px 0;
     font-size: 15px;
     font-weight: 500;
-    min-height: 20px; 
+    min-height: 20px; /* يضمن وجود مساحة حتى لو النص فارغ */
 }
 .phone-input-group {
     display: flex;
