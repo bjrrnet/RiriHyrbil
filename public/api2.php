@@ -251,7 +251,7 @@ break;
                      FROM bookings 
                      WHERE car_id = c.id 
                      AND status NOT IN ('cancelled') 
-                     AND return_date >= CURDATE()
+                     AND return_date > CURDATE()
                     ) AS next_available_date
                 FROM cars c
                 WHERE c.is_available = 1
