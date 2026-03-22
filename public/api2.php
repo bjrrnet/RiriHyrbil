@@ -52,71 +52,71 @@ switch ($action) {
         }
     break;
     case 'forgot_password':
-        $email = isset($data['email']) ? trim($data['email']) : '';
+    $email = isset($data['email']) ? trim($data['email']) :
 
-        if (empty($email)) {
-            echo json_encode(["success" => false, "message" => "Email is required"]);
-            break;
-        }
+    if (empty($email)) {
+        echo json_encode(["success" => false, "message" => "Email is required"]);
+        break;
+    }
 
-        $stmt = $pdo->prepare("SELECT id, full_name FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
+    $stmt = $pdo->prepare("SELECT id, full_name FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
 
-        if (!$user) {
-            echo json_encode(["success" => false, "message" => "Email not found"]);
-            break;
-        }
+    if (!$user) {
+        echo json_encode(["success" => false, "message" => "Email not found"]);
+        break;
+    }
 
-        $token = bin2hex(random_bytes(32));
-        $expires = date("Y-m-d H:i:s", strtotime('+1 hour'));
+    $token = bin2hex(random_bytes(32));
+    $expires = date("Y-m-d H:i:s", strtotime('+1 hour'));
 
-        $update = $pdo->prepare("UPDATE users SET reset_token = ?, token_expires = ? WHERE email = ?");
-        $update->execute([$token, $expires, $email]);
+    $update = $pdo->prepare("UPDATE users SET reset_token = ?, token_expires = ? WHERE email = ?");
+    $update->execute([$token, $expires, $email]);
 
-        $resetLink = "https://bilix.org/html/reset_password.html?token=" . $token;
+    $resetLink = "https://bilix.org/html/reset_password.html?token=" . $token;
+    
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'smtp-relay.brevo.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'a5a6de001@smtp-brevo.com';
+        $mail->Password   = '';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
-        $mail = new PHPMailer(true);
-        try {
-            $mail->isSMTP();
-            $mail->Host       = 'smtp-relay.brevo.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'a5a6de001@smtp-brevo.com';
-            $mail->Password   = '';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+        $mail->setFrom('bilixcars@gmail.com', 'Bilix');
+        $mail->addAddress($email, $user['full_name']);
 
-            $mail->setFrom('bilixcars@gmail.com', 'Bilix');
-            $mail->addAddress($email, $user['full_name']);
-            
-            $mail->isHTML(true);
-            $mail->CharSet = 'UTF-8';
-            $mail->Subject = 'Reset your password';
-            $mail->Body    = "
-                <div style='font-family: Arial; padding: 20px;'>
-                    <h2>Hello {$user['full_name']}!</h2>
-                    <p>Click the button below to reset your password:</p>
-                    <a href='{$resetLink}' style='
+        $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Subject = 'Reset your password';
+        $mail->Body    = "
+            <div style='font-family: Arial; padding: 20px;'>
+                <h2>Hello {$user['full_name']}!</h2>
+                <p>Click the button below to reset your password:</p>
+                <a href='{$resetLink}' style='
                         background-color: #313a6e;
-                        color: white;
-                        padding: 12px 24px;
-                        text-decoration: none;
-                        border-radius: 5px;
-                        display: inline-block;
-                    '>Reset Password</a>
-                    <p style='color: gray; margin-top: 20px;'>
-                        This link is valid for 1 hour only.
-                    </p>
-                </div>
-            ";
+                    color: white;
+                    padding: 12px 24px;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    display: inline-block;
+                '>Reset Password</a>
+                <p style='color: gray; margin-top: 20px;'>
+                    This link is valid for 1 hour only.
+                </p>
+            </div>
+        ";
 
-            $mail->send();
-            echo json_encode(["success" => true]);
+        $mail->send();
+        echo json_encode(["success" => true]);
 
-        } catch (Exception $e) {
-            echo json_encode(["success" => false, "message" => "Email error: " . $mail->ErrorInfo]);
-        }
-    break;
+    } catch (Exception $e) {
+        echo json_encode(["success" => false, "message" => "Email error: " . $mail->ErrorInfo]);
+    }
+break;
 
     case 'reset_password_submit':
         $token = $data['token'] ?? '';
@@ -306,9 +306,79 @@ break;
             $data['total_price'],
             $data['national_id']
         ]);
+        if ($res) {
+            $locationAddresses = [
+                'Göteborg'  => 'Avenyn 1, 411 36 Göteborg',
+                'Malmö'     => 'Stortorget 5, 211 22 Malmö',
+                'Stockholm' => 'Drottninggatan 10, 111 51 Stockholm',
+            ];
 
-        echo json_encode(["success" => $res]);
-    break;
+            $stmtCar = $pdo->prepare("SELECT name, brand, model, location FROM cars WHERE id = ?");
+            $stmtCar->execute([$data['car_id']]);
+            $car = $stmtCar->fetch();
+
+            $location = $car['location'] ?? 'N/A';
+            $address  = $locationAddresses[$location] ?? $location;
+            $carName  = $car['name'] ?? ($car['brand'] . ' ' . $car['model']);
+
+            $mail2 = new PHPMailer(true);
+            try {
+                $mail2->isSMTP();
+                $mail2->Host       = 'smtp-relay.brevo.com';
+                $mail2->SMTPAuth   = true;
+                $mail2->Username   = 'a5a6de001@smtp-brevo.com';
+                $mail2->Password   = '';
+                $mail2->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail2->Port       = 587;
+                $mail2->setFrom('bilixcars@gmail.com', 'Bilix');
+                $mail2->addAddress($user['email'], $user['full_name']);
+                $mail2->isHTML(true);
+                $mail2->CharSet = 'UTF-8';
+                $mail2->Subject = "Booking Confirmation - $carName";
+                $mail2->Body = "
+                    <div style='font-family: Arial; padding: 20px; max-width: 600px;'>
+                        <h2>Hello {$user['full_name']}! 🚗</h2>
+                        <p>Your booking is confirmed! Here are your details:</p>
+                        <table style='width:100%; border-collapse: collapse;'>
+                            <tr style='background:#f5f5f5;'>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Car</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'>$carName</td>
+                            </tr>
+                            <tr>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Pickup Location</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'>$location<br><small>$address</small></td>
+                            </tr>
+                            <tr style='background:#f5f5f5;'>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Pickup Date</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'>{$data['pickup_date']}</td>
+                            </tr>
+                            <tr>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Return Date</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'>{$data['return_date']}</td>
+                            </tr>
+                            <tr style='background:#f5f5f5;'>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Total Days</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'>{$data['total_days']} days</td>
+                            </tr>
+                            <tr>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>Total Price</strong></td>
+                                <td style='padding:10px; border:1px solid #ddd;'><strong>{$data['total_price']} SEK</strong></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <p>Thank you for choosing Bilix! 😊</p>
+                        <p style='color:gray; font-size:12px;'>Want to cancel? Log in to your profile.</p>
+                    </div>
+                ";
+                $mail2->send();
+            } catch (Exception $e) {
+            }
+
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["success" => false]);
+        } 
+        break;
 
     case 'myBookings':
         if (!isset($_SESSION['user_id'])) {
@@ -367,7 +437,61 @@ break;
         $stmt = $pdo->prepare("INSERT INTO requests (user_id, SUBJECT, message) VALUES (?, ?, ?)");
         $result = $stmt->execute([$_SESSION['user_id'], $subject, $message]);
 
-        echo json_encode(["success" => $result]);
+if ($result) {
+    $stmtUser = $pdo->prepare("SELECT full_name, email FROM users WHERE id = ?");
+    $stmtUser->execute([$_SESSION['user_id']]);
+    $sender = $stmtUser->fetch();
+
+    $mail3 = new PHPMailer(true);
+    try {
+        $mail3->isSMTP();
+        $mail3->Host       = 'smtp-relay.brevo.com';
+        $mail3->SMTPAuth   = true;
+        $mail3->Username   = 'a5a6de001@smtp-brevo.com';
+        $mail3->Password   = '';
+        $mail3->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail3->Port       = 587;
+        $mail3->setFrom('bilixcars@gmail.com', 'Bilix');
+        $mail3->addAddress('bilixcars@gmail.com', 'Bilix Support');
+        $mail3->addReplyTo($sender['email'], $sender['full_name']);
+        $mail3->isHTML(true);
+        $mail3->CharSet = 'UTF-8';
+        $mail3->Subject = "New Request: $subject";
+        $mail3->Body = "
+            <div style='font-family: Arial; padding: 20px; max-width: 600px;'>
+                <h2>New Support Request 📩</h2>
+                <table style='width:100%; border-collapse: collapse;'>
+                    <tr style='background:#f5f5f5;'>
+                        <td style='padding:10px; border:1px solid #ddd;'><strong>From</strong></td>
+                        <td style='padding:10px; border:1px solid #ddd;'>{$sender['full_name']}</td>
+                    </tr>
+                    <tr>
+                        <td style='padding:10px; border:1px solid #ddd;'><strong>Email</strong></td>
+                        <td style='padding:10px; border:1px solid #ddd;'>{$sender['email']}</td>
+                    </tr>
+                    <tr style='background:#f5f5f5;'>
+                        <td style='padding:10px; border:1px solid #ddd;'><strong>Subject</strong></td>
+                        <td style='padding:10px; border:1px solid #ddd;'>$subject</td>
+                    </tr>
+                    <tr>
+                        <td style='padding:10px; border:1px solid #ddd;'><strong>Message</strong></td>
+                        <td style='padding:10px; border:1px solid #ddd;'>$message</td>
+                    </tr>
+                </table>
+                <br>
+                <p style='color:gray; font-size:12px;'>You can reply directly to this email to respond to the user.</p>
+            </div>
+        ";
+        $mail3->send();
+    } catch (Exception $e) {
+
+    }
+
+    echo json_encode(["success" => true]);
+} else {
+    echo json_encode(["success" => false, "message" => "Failed to submit request"]);
+}
+break;
         break;
 
     case 'logout':
