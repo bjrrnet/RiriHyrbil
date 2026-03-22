@@ -26,27 +26,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 bookings.forEach(b => {
                     const clone = template.content.cloneNode(true);
-
                     clone.querySelector(".car-name").textContent = b.car_name || `${b.brand} ${b.model}`;
                     clone.querySelector(".loc-val").textContent = b.location || "N/A";
-                    
+
                     clone.querySelector(".from-val").textContent = formatDate(b.pickup_date);
                     clone.querySelector(".to-val").textContent = formatDate(b.return_date);
-                    
+
                     clone.querySelector(".dur-val").textContent = b.total_days;
                     clone.querySelector(".price-val").textContent = `${Number(b.total_price).toLocaleString()} SEK`;
-                    
+
                     const cancelBtn = clone.querySelector(".btn-cancel");
-                    cancelBtn.addEventListener("click", () => openCancelModal(b.id));
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    const returnDate = new Date(b.return_date);
+
+                    if (returnDate < today) {
+                        cancelBtn.textContent = "Completed ";
+                        cancelBtn.disabled = true;
+                        cancelBtn.style.cssText = "background:#ffffff; cursor:not-allowed; opacity:0.7;";
+                    } else {
+                        cancelBtn.addEventListener("click", () => openCancelModal(b.id));}
 
                     wrapper.appendChild(clone);
                 });
-            })
-            .catch(err => {
-                console.error("Fetch error:", err);
-                wrapper.innerHTML = "<p class='error-text'>Error loading bookings. Please try again.</p>";
-            });
-    };
+                })
+                .catch(err => {
+                    console.error("Fetch error:", err);
+                    wrapper.innerHTML = "<p class='error-text'>Error loading bookings. Please try again.</p>";
+                });
+};
 
     window.openCancelModal = (id) => {
         bookingIdToDelete = id;

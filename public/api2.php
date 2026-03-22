@@ -74,21 +74,21 @@ switch ($action) {
         $update = $pdo->prepare("UPDATE users SET reset_token = ?, token_expires = ? WHERE email = ?");
         $update->execute([$token, $expires, $email]);
 
-        $resetLink = "https://hyrabil.rf.gd/html/reset_password.html?token=" . $token;
+        $resetLink = "https://bilix.org/html/reset_password.html?token=" . $token;
 
         $mail = new PHPMailer(true);
         try {
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'smtp-relay.brevo.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'bilixcars@gmail.com';
-            $mail->Password   = 'tqwuujjmuaddwwgb';
+            $mail->Username   = 'a5a6de001@smtp-brevo.com';
+            $mail->Password   = '';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom('bilixcars@gmail.com', 'HyraBil');
+            $mail->setFrom('bilixcars@gmail.com', 'Bilix');
             $mail->addAddress($email, $user['full_name']);
-
+            
             $mail->isHTML(true);
             $mail->CharSet = 'UTF-8';
             $mail->Subject = 'Reset your password';
@@ -97,7 +97,7 @@ switch ($action) {
                     <h2>Hello {$user['full_name']}!</h2>
                     <p>Click the button below to reset your password:</p>
                     <a href='{$resetLink}' style='
-                        background-color: #4CAF50;
+                        background-color: #313a6e;
                         color: white;
                         padding: 12px 24px;
                         text-decoration: none;
