@@ -43,9 +43,7 @@ body {
     cursor: pointer; 
     color: white; 
 }
-#hamburger-menu img { 
-    filter: brightness(0) invert(1); 
-} 
+
 .menu-text { 
     font-size: 14px; 
     font-weight: bold; 
@@ -54,8 +52,6 @@ body {
 #bilix-logo img { 
     height: 110px; 
     width: auto; 
-    display: block; 
-    object-fit: contain; 
 }
 
 .boka-bil-btn {
@@ -81,15 +77,19 @@ body {
     gap: 5px;               
     position: relative;     
 }
-
-.icon-item img {
-    height: 45px;           
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
+.icon-item, #hamburger-menu {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }
+.icon-item i, #hamburger-menu i { font-size: 22px; }
+.icon-item span, .menu-text { font-size: 13px; margin-top: 4px; }
 
-.icon-item:hover img {
+
+.icon-item:hover {
     transform: scale(1.1);
 }
 
@@ -279,4 +279,49 @@ body {
     background: #1a1a1a; 
     padding: 15px; 
     font-size: 14px; 
+}
+@media (max-width: 768px) {
+    #db_navbar { 
+        height: 75px; 
+        padding: 0 10px; 
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-left, #bilix-logo, .nav-right {
+        flex: 1; 
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-left { 
+        justify-content: flex-start; 
+    }
+
+    #bilix-logo { 
+        justify-content: center; 
+    }
+    #bilix-logo img { 
+        height: 90px;
+        width: auto;
+    }
+
+    .nav-right { 
+        justify-content: flex-end; 
+        gap: 12px; 
+    }
+
+    .icon-item, #hamburger-menu {
+        flex-shrink: 0; 
+        min-width: 45px;
+    }
+
+    .icon-item i, #hamburger-menu i { 
+        font-size: 18px; 
+    }
+
+    .icon-item span, .menu-text { 
+        font-size: 9px;
+        white-space: nowrap; 
+    }
 }

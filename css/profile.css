@@ -164,7 +164,7 @@ body {
     padding: 8px 0;
     font-size: 15px;
     font-weight: 500;
-    min-height: 20px; /* يضمن وجود مساحة حتى لو النص فارغ */
+    min-height: 20px; 
 }
 .phone-input-group {
     display: flex;
@@ -356,4 +356,80 @@ body {
     background: #1a1a1a; 
     padding: 15px; 
     font-size: 14px; 
+}
+#menu-options {
+    position: fixed;
+    top: 0;
+    left: -280px; 
+    width: 280px;
+    height: 100vh;
+    background: #0f1e6e;
+    transition: 0.3s ease;
+    z-index: 2001;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+#menu-options.show { left: 0; }
+
+#menu-options a {
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.close-menu {
+    color: white;
+    padding: 10px 25px;
+    cursor: pointer;
+    text-align: right;
+    font-weight: bold;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 2000;
+}
+
+#overlay.show { display: block; }
+
+#hamburger-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #db_navbar {
+        height: 70px !important;
+        padding: 0 15px !important;
+        justify-content: space-between !important;
+    }
+
+    .nav-center { display: none !important; }
+
+    #hamburger-menu { display: flex; } 
+
+    #bilix-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #bilix-logo img { height: 45px !important; }
+
+    .nav-right { min-width: auto !important; }
+    
+    .icon-item img { height: 30px !important; }
+    .icon-item span { font-size: 10px !important; }
 }

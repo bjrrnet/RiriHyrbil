@@ -11,8 +11,14 @@ body {
     overflow-x: hidden; 
 }
 
+.headside-bgColor {
+    background: #f4f4f4; 
+    color: #333;
+}
+
 #db_navbar { 
     position: relative; 
+    top: 0; 
     width: 100%; 
     height: 90px;
     background: linear-gradient(135deg, #505160, #0f1e6e);
@@ -38,50 +44,59 @@ body {
     color: white; 
 }
 
-#hamburger-menu img { 
-    filter: brightness(0) invert(1); 
-}
-
 .menu-text { 
     font-size: 14px; 
     font-weight: bold; 
-    margin-top: 2px; 
-}
+    margin-top: 2px; }
 
 #bilix-logo img { 
     height: 110px; 
     width: auto; 
-    display: block; 
-    object-fit: contain; 
+}
+
+.boka-bil-btn {
+    background-color: #e85111;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.boka-bil-btn:hover { 
+    background-color: #e85111; }
+
+
+.icon-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    font-size: 14px;        
+    gap: 5px;               
+    position: relative;     
+}
+.icon-item, #hamburger-menu {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+.icon-item i, #hamburger-menu i { font-size: 22px; }
+.icon-item span, .menu-text { font-size: 13px; margin-top: 4px; }
+
+
+.icon-item:hover {
+    transform: scale(1.1);
 }
 
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 30px;
-}
-
-
-.icon-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    gap: 5px;
-    position: relative;
-}
-
-.icon-item img {
-    height: 45px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
-}
-
-.icon-item:hover img {
-    transform: scale(1.1);
+    gap: 30px;              
 }
 
 #menu-options { 
@@ -91,18 +106,15 @@ body {
     width: 280px; 
     height: 100vh; 
     background-color: rgba(0,0,0,0.9); 
-    display: flex; 
-    flex-direction: column; 
+    display: flex; flex-direction: column; 
     padding-top: 80px; 
     transition: transform 0.3s ease; 
     transform: translateX(-100%); 
     z-index: 2001;
 }
-
 #menu-options.show { 
     transform: translateX(0); 
 }
-
 #menu-options a { 
     color: white; 
     text-decoration: none; 
@@ -110,23 +122,18 @@ body {
     padding: 15px 25px; 
     border-bottom: 1px solid #333; 
 }
-
 #menu-options a:hover { 
     background: #333; 
     color: #e85111; 
 }
-
 #overlay { 
     position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
     background: rgba(0,0,0,0.5); 
     display: none; 
     z-index: 2000; 
 }
-
 #overlay.show { 
     display: block; 
 }
@@ -722,3 +729,67 @@ header p {
     padding: 15px; 
     font-size: 14px; 
 }
+@media (max-width: 768px) {
+    #db_navbar {
+        height: 75px !important;
+        padding: 0 10px !important;
+        position: relative !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .nav-left, .nav-right {
+        flex: 1 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .nav-left { justify-content: flex-start !important; }
+    .nav-right { justify-content: flex-end !important; gap: 10px !important; }
+
+    #bilix-logo {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        margin: 0 !important;
+        z-index: 5;
+    }
+
+    #bilix-logo img {
+        height: 90px !important; 
+        width: auto !important;
+    }
+
+    .icon-item img, #hamburger-menu img {
+        height: 25px !important; 
+        width: auto !important;
+    }
+
+    .icon-item span, .menu-text {
+        font-size: 9px !important;
+        white-space: nowrap;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .search-container {
+        padding: 15px !important;
+    }
+
+    .cars-grid {
+        grid-template-columns: 1fr !important; 
+        padding: 10px;
+    }
+
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95% !important;
+        padding: 20px !important;
+    }
+} }

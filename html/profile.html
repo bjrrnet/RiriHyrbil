@@ -12,12 +12,18 @@
 <body>
     <header id="db_navbar">
         <div class="nav-left">
-            <div id="bilix-logo">
-                <a href="biluthyrning.html">
-                    <img src="../html/social/car_logo.png" alt="Bilix logo">
-                </a>    
+            <div id="hamburger-menu" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars" style="font-size: 20px;"></i>
+                <span class="menu-text">Menu</span>
             </div>
         </div>
+
+        <div id="bilix-logo">
+            <a href="../html/biluthyrning.html">
+                <img src="../html/social/car_logo.png" alt="Bilix logo">
+            </a>    
+        </div>
+
         <nav class="nav-center">
             <ul>
                 <li><a href="../html/MyRequests.html">My Requests</a></li>
@@ -32,6 +38,15 @@
                 <span>Log In</span>
             </a>
         </div>
+
+        <div id="menu-options">
+            <div class="close-menu" onclick="toggleMenu()">X Close</div>
+            <a href="../html/MyRequests.html">My Requests</a>
+            <a href="../html/profile.html">My Profile</a>
+            <a href="../html/my_bookings.html">My Bookings</a>
+            <a href="../html/bil_contact.html">Contact</a>
+        </div>
+        <div id="overlay" onclick="toggleMenu()"></div>
     </header>
 
     <main class="profile-container">
@@ -53,7 +68,8 @@
                     <i class="fa-solid fa-phone" style="color: #0f1e6e;"></i>
                     <div>
                         <label>Phone Number</label>
-                        <div class="phone-input-group"> <input type="tel" id="user-phone-number" placeholder="07XXXXXXXX">
+                        <div class="phone-input-group"> 
+                            <input type="tel" id="user-phone-number" placeholder="07XXXXXXXX">
                             <button id="save-phone">Save</button>
                         </div>
                     </div>
@@ -84,11 +100,11 @@
         <div class="logout-section">
             <button id="logout-btn-profile" class="btn-main-logout">LOG OUT</button>
         </div>
-            <hr class="section-divider">
-            <div class="danger-zone">
-                <h3>Danger Zone</h3>
-                <p>Once you delete your account, there is no going back. Please be certain.</p>
-                <button id="delete-account-btn" class="btn-delete">Delete Account</button>
+        <hr class="section-divider">
+        <div class="danger-zone">
+            <h3>Danger Zone</h3>
+            <p>Once you delete your account, there is no going back. Please be certain.</p>
+            <button id="delete-account-btn" class="btn-delete">Delete Account</button>
             </div>
         </div>
     </main>
@@ -101,7 +117,7 @@
                 <p>Online car rental service.</p>
             </div>
             <div class="footer-col">
-               <h6>Our Cars</h6>
+                <h6>Our Cars</h6>
                 <p><a href="#">Electric </a></p>
                 <p><a href="#">SUV</a></p>
                 <p><a href="#">Luxury</a></p>
@@ -134,8 +150,13 @@
     </footer>
     <script src="../js/profile.js"></script>
     <script src="../js/auth.js"></script>
-
-
-
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu-options');
+            const overlay = document.getElementById('overlay');
+            menu.classList.toggle('show');
+            overlay.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>

@@ -113,3 +113,23 @@ main.login-wrapper {
 .links a:hover {
     text-decoration: underline;
 }
+@media (max-width: 600px) {
+
+       .login-wrapper {
+        min-height: auto;
+        padding-bottom: 50px;
+    }
+
+    .login-card {
+        width: 90% !important;
+        max-width: none;
+        padding: 30px 15px;
+        margin: 0 auto;
+    }
+
+    #btn_Login {
+        width: 100% !important; 
+        max-width: 100%;
+    }
+
+}

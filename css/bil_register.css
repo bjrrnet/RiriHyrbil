@@ -128,4 +128,37 @@ input[type="password"] {
 .text-center a:hover {
     text-decoration: underline;
 }
+@media (max-width: 600px) {
+    .card {
+        width: 95%; 
+        padding: 20px 15px;
+        margin-top: 100px; 
+    }
 
+    .right-side {
+        padding: 10px;
+    }
+
+    .form-row {
+        flex-direction: column; 
+        gap: 10px;
+        width: 100%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100% !important;
+        flex: none;
+    }
+
+    .btn {
+        width: 100%; 
+        max-width: 100%;
+    }
+
+    #bilix-logo img {
+        justify-content: center;
+    }
+ 
+}
