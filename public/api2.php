@@ -46,6 +46,7 @@ switch ($action) {
         if ($user && password_verify($password, $user['password_hash'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['full_name'] = $user['full_name'];
+            $_SESSION['national_id'] = $user['national_id'];
             echo json_encode(["success" => true, "user" => $user['full_name']]);
         } else {
             echo json_encode(["success" => false, "message" => "Invalid email or password"]);
@@ -185,8 +186,9 @@ break;
         echo json_encode([
             "loggedIn" => isset($_SESSION['user_id']),
             "username" => $_SESSION['full_name'] ?? null
+            "national_id" => $_SESSION['national_id'] ?? null
             ]);
-        break;        
+    break;        
     case 'getUserDetails':
 
     if (!isset($_SESSION['user_id'])) {
@@ -299,6 +301,7 @@ break;
         if ($national_id) {
             $updateUser = $pdo->prepare("UPDATE users SET national_id = ? WHERE id = ?");
             $updateUser->execute([$national_id, $user_id]);
+            $_SESSION['national_id'] = $national_id;
         }
 
         $stmtUser = $pdo->prepare("SELECT full_name, email, phone FROM users WHERE id = ?");

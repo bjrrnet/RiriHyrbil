@@ -170,6 +170,12 @@ searchCars() {
         const total = days * car.price;
         
         this.selectedCarForBooking = { ...car, days, total, start, end };
+
+        if (data.national_id) {
+            this.selectedCarForBooking.national_id = data.national_id;
+            this.executeBooking();
+            return;
+        }
         
         const detailsContainer = document.getElementById('modal-car-details');
         if (detailsContainer) {
@@ -185,7 +191,7 @@ searchCars() {
 
     async executeBooking() {
         const input = document.getElementById('national-id-input');
-        const nationalId = input?.value.trim();
+        const nationalId = this.selectedCarForBooking?.national_id || input?.value.trim();
 
         if (!nationalId || nationalId.length !== 12 || !/^\d+$/.test(nationalId)) {
             alert("National ID must be exactly 12 digits");
