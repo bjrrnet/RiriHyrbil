@@ -26,12 +26,18 @@ switch ($action) {
         }
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
+        $check = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+        $check->execute([$email]);
+        if ($check->fetch()) {
+            echo json_encode(["success" => false, "message" => "This email is already registered, please login"]);
+            break;
+        }
         
         try {
             $stmt = $pdo->prepare("INSERT INTO users (full_name, email, phone, password_hash) VALUES (?, ?, ?, ?)");
             $stmt->execute([$full_name, $email, $phone, $hash]);
             echo json_encode(["success" => true]);
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             echo json_encode(["success" => false, "message" => "Email is already registered"]);
         }
     break;
@@ -185,7 +191,7 @@ break;
     case 'checkLogin':
         echo json_encode([
             "loggedIn" => isset($_SESSION['user_id']),
-            "username" => $_SESSION['full_name'] ?? null
+            "username" => $_SESSION['full_name'] ?? null,
             "national_id" => $_SESSION['national_id'] ?? null
             ]);
     break;        

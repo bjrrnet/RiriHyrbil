@@ -14,6 +14,11 @@ document.getElementById('btn_Register').addEventListener('click', function() {
         alert("Passwords do not match. Please try again.");
         return;
     }
+    const emailDomain = userData.email.split('@')[1]?.toLowerCase();
+    if (!emailDomain || !['gmail.com', 'hotmail.com'].includes(emailDomain)) {
+        alert("Only Gmail or Hotmail email addresses are allowed.");
+        return;
+    }
 
     fetch('../public/api2.php?action=register', {
         method: 'POST',
