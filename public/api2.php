@@ -206,7 +206,7 @@ break;
         "success" => true,
         "data" => $user
     ]);
-break;
+    break;
 
     break;
     case 'updatePhone':
@@ -223,7 +223,24 @@ break;
 
         echo json_encode(["success" => $result]);
 
-    break;      
+    break;
+
+    case 'updateAddress':
+
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false]);
+        break;
+    }
+
+    $address = $data['address'] ?? '';
+
+    $stmt = $pdo->prepare("UPDATE users SET address = ? WHERE id = ?");
+    $result = $stmt->execute([$address, $_SESSION['user_id']]);
+
+    echo json_encode(["success" => $result]);
+
+    break;
+
     case 'getMyRequests':
 
         if (!isset($_SESSION['user_id'])) {
@@ -378,7 +395,7 @@ break;
         } else {
             echo json_encode(["success" => false]);
         } 
-        break;
+    break;
 
     case 'myBookings':
         if (!isset($_SESSION['user_id'])) {

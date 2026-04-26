@@ -63,6 +63,13 @@
                         <p id="user-full-name">Loading...</p>
                     </div>
                 </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-envelope" style="color: #0f1e6e;"></i>
+                    <div>
+                        <label>Email Address</label>
+                        <p id="user-email-address">--</p>
+                    </div>
+                </div>
 
                 <div class="detail-item">
                     <i class="fa-solid fa-phone" style="color: #0f1e6e;"></i>
@@ -76,35 +83,38 @@
                 </div>
 
                 <div class="detail-item">
-                    <i class="fa-solid fa-envelope" style="color: #0f1e6e;"></i>
+                        <i class="fa-solid fa-location-dot" style="color: #0f1e6e;"></i>
                     <div>
-                        <label>Email Address</label>
-                        <p id="user-email-address">--</p>
+                    <label>Address</label>
+                        <div class="phone-input-group">
+                            <input type="text" id="user-address" placeholder="Enter your address">
+                            <button id="save-address">Save</button>
+                        </div>
                     </div>
-                </div>
+                </div>               
             </div>
 
-            <div class="profile-card-group">
-                <div class="profile-card side-card">
-                    <label>Driver's License</label>
-                    <p id="license-status" class="status-text">Not added yet</p>
+                <div class="profile-card-group">
+                    <div class="profile-card side-card">
+                        <label>Driver's License</label>
+                        <p id="license-status" class="status-text">Not added yet</p>
+                    </div>
+                    
+                    <div class="profile-card side-card">
+                        <h4>Payment Method</h4>
+                        <p id="payment-status" class="status-text">Card - Updated in app</p>
+                    </div>
                 </div>
-                
-                <div class="profile-card side-card">
-                    <h4>Payment Method</h4>
-                    <p id="payment-status" class="status-text">Card - Updated in app</p>
-                </div>
-            </div>
         </div>
 
         <div class="logout-section">
             <button id="logout-btn-profile" class="btn-main-logout">LOG OUT</button>
         </div>
         <hr class="section-divider">
-        <div class="danger-zone">
-            <h3>Danger Zone</h3>
-            <p>Once you delete your account, there is no going back. Please be certain.</p>
-            <button id="delete-account-btn" class="btn-delete">Delete Account</button>
+            <div class="danger-zone">
+                <h3>Danger Zone</h3>
+                <p>Once you delete your account, there is no going back. Please be certain.</p>
+                <button id="delete-account-btn" class="btn-delete">Delete Account</button>
             </div>
         </div>
     </main>

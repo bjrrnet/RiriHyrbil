@@ -53,6 +53,30 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    document.getElementById('save-address').addEventListener('click', function () {
+        const address = document.getElementById('user-address').value.trim();
+        if (address.length < 5) {
+            alert("Please enter a valid address.");
+            return;
+        }
+
+        fetch('../public/api2.php?action=updateAddress', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ address: address })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert("Address updated successfully!");
+            } else {
+                alert("Failed to update address.");
+            }
+        });
+    });
 
     document.getElementById('logout-btn-profile').addEventListener('click', function() {
         fetch('../public/api2.php?action=logout', {
