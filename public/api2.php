@@ -304,6 +304,21 @@ break;
         $user_id = $_SESSION['user_id'];
         $national_id = $data['national_id'] ?? null;
 
+        try {
+            $pdo->beginTransaction();
+
+            $lock = $pdo->prepare("SELECT id FROM cars WHERE id = ? FOR UPDATE");
+            $lock->execute([$data['car_id']]);
+
+            $check = pdo->prepare("SELECT id FROM bookings WHERE car id = ? AND status != 'cancelled' AND pickup_date < ? AND return_date > ?");
+            $check = pdo->execute([$data['car_id'], $data['return_date'], $data['pickup_date']);
+
+            if ($check->fetch()) {
+                pdo->rollback();
+                echo json_encode(["success" => false, "Message" => "Fel vid beställning, var god försök igen."]);
+
+
+
         if ($national_id) {
             $updateUser = $pdo->prepare("UPDATE users SET national_id = ? WHERE id = ?");
             $updateUser->execute([$national_id, $user_id]);
