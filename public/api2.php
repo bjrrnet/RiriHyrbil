@@ -273,20 +273,35 @@ break;
     case 'cars':
         try {
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pickup = $_GET['pickup'] ?? null;
+            $return = $_GET['return'] ?? null;
+
             $query = "
                 SELECT 
                     c.*, 
                     (SELECT MAX(return_date) 
-                     FROM bookings 
-                     WHERE car_id = c.id 
-                     AND status NOT IN ('cancelled') 
-                     AND return_date > CURDATE()
-                    ) AS next_available_date
+                    FROM bookings 
+                    WHERE car_id = c.id 
+                    AND status NOT IN ('cancelled') 
+                    AND return_date > CURDATE()
+                    ) AS next_available_date,
+                    (SELECT COUNT(*) 
+                    FROM bookings 
+                    WHERE car_id = c.id 
+                    AND status NOT IN ('cancelled')
+                    AND pickup_date < :return_date 
+                    AND return_date > :pickup_date
+                    ) AS is_booked_in_range
                 FROM cars c
                 WHERE c.is_available = 1
             ";
 
-            $stmt = $pdo->query($query);
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                'pickup_date' => $pickup ?? '1970-01-01',
+                'return_date' => $return ?? '1970-01-01'
+            ]);
+
             $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($cars);
 

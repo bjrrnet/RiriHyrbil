@@ -29,10 +29,14 @@ class CarRentalApp {
             const modal = document.getElementById('booking-modal');
             if (modal && modal.style.display === 'block' && e.target === modal) {
                 this.closeModal();}
-           
+        
             
-        });document.getElementById('start-date').addEventListener('change', () => this.searchCars());
-        document.getElementById('end-date').addEventListener('change', () => this.searchCars());
+        });document.getElementById('start-date').addEventListener('change', () => {
+            const start = document.getElementById('start-date').value;
+            document.getElementById('end-date').min = start;
+            this.loadCars();
+        });
+        document.getElementById('end-date').addEventListener('change', () => this.loadCars());
         document.getElementById('confirm-booking-btn')?.addEventListener('click', () => this.executeBooking());
         
         document.getElementById('national-id-input')?.addEventListener('keypress', (e) => {
@@ -49,7 +53,15 @@ class CarRentalApp {
     async loadCars() {
         try {
             this.showLoading(true);
-            const response = await fetch('../public/api2.php?action=cars');
+            const start = document.getElementById('start-date')?.value;
+            const end = document.getElementById('end-date')?.value;
+
+            if (start && end && new Date(start) >= new Date(end)) {
+                this.showError('End date must be after start date');
+                this.showLoading(false);
+                return;
+            }
+            const response = await fetch(`../public/api2.php?action=cars${start && end ? `&pickup=${start}&return=${end}` : ''}`);
             const dbCars = await response.json();
             this.cars = dbCars.map(car => {
                 let brand = car.brand;
@@ -67,7 +79,8 @@ class CarRentalApp {
                     car_type: car.category,
                     image_url: car.image_url,
                     location: location,
-                    next_available_date: car.next_available_date
+                    next_available_date: car.next_available_date,
+                    is_booked_in_range: car.is_booked_in_range > 0
                 };
             });
             this.filteredCars = [...this.cars];
@@ -89,7 +102,7 @@ class CarRentalApp {
         grid.innerHTML = this.filteredCars.map(car => {
             const today = new Date();
             today.setHours(0,0,0,0);
-            const isAvailable = !car.next_available_date || new Date(car.next_available_date) < today;
+			const isAvailable = !car.is_booked_in_range;
             const statusHTML = isAvailable 
                 ? `<span class="availability-tag status-available">Available</span>`
                 : `<span class="availability-tag status-busy" data-tooltip="Available from: ${this.formatDate(car.next_available_date)}">Not Available</span>`;
@@ -120,29 +133,29 @@ class CarRentalApp {
         }).join('');
     }
 
-searchCars() {
-    const loc = document.getElementById('location')?.value.toLowerCase().trim();
-    const startDate = document.getElementById('start-date')?.value;
-    const endDate = document.getElementById('end-date')?.value;
+    searchCars() {
+        const loc = document.getElementById('location')?.value.toLowerCase().trim();
+        const startDate = document.getElementById('start-date')?.value;
+        const endDate = document.getElementById('end-date')?.value;
 
-    if (!startDate || !endDate) {
-        this.showError('Please select start and end dates');
-        return;
+        if (!startDate || !endDate) {
+            this.showError('Please select start and end dates');
+            return;
+        }
+
+        if (new Date(startDate) >= new Date(endDate)) {
+            this.showError('End date must be after start date');
+            return;
+        }
+
+        this.filteredCars = this.cars.filter(car => {
+            const matchesLoc = !loc || car.location.toLowerCase().includes(loc);
+            const matchesFilter = this.currentFilter === 'all' || car.car_type === this.currentFilter;
+            return matchesLoc && matchesFilter;
+        });
+
+        this.renderCars();
     }
-
-    if (new Date(startDate) >= new Date(endDate)) {
-        this.showError('End date must be after start date');
-        return;
-    }
-
-    this.filteredCars = this.cars.filter(car => {
-        const matchesLoc = !loc || car.location.toLowerCase().includes(loc);
-        const matchesFilter = this.currentFilter === 'all' || car.car_type === this.currentFilter;
-        return matchesLoc && matchesFilter;
-    });
-
-    this.renderCars();
-}
 
     setFilter(filter) {
         this.currentFilter = filter;
@@ -282,7 +295,7 @@ searchCars() {
     showLoading(show) {
                 const loading = document.getElementById('loading');
                 loading.style.display = show ? 'block' : 'none';
-            }
+    }
     showError(message) {
         this.showNotification(message, 'error');
     }
