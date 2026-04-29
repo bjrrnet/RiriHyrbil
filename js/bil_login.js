@@ -23,10 +23,13 @@ document.getElementById('btn_Login').addEventListener('click', function(event) {
     .then(result => {
         if (result.success) {
             localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("userName", result.user); 
-            
+            localStorage.setItem("userName", result.user);
+            if (result.national_id) {
+                localStorage.setItem("national_id", result.national_id);
+            }
+            const pendingCar = localStorage.getItem('pendingBookingCarId');
             alert("Login successful. Welcome back!");
-            window.location.href = 'biluthyrning.html'; 
+            window.location.href = pendingCar ? 'cars_page.html' : 'biluthyrning.html';
         } else {
             alert(result.message || "Invalid email or password.");
         }

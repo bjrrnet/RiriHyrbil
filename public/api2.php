@@ -53,15 +53,19 @@ switch ($action) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['full_name'] = $user['full_name'];
             $_SESSION['national_id'] = $user['national_id'];
-            echo json_encode(["success" => true, "user" => $user['full_name']]);
+            echo json_encode([
+                "success" => true, 
+                "user" => $user['full_name'],
+                "national_id" => $user['national_id']
+            ]);
         } else {
             echo json_encode(["success" => false, "message" => "Invalid email or password"]);
         }
     break;
     case 'forgot_password':
-    $email = isset($data['email']) ? trim($data['email']) :
+    $email = isset($data['email']) ? trim($data['email']) : '';
 
-    if (empty($email)) {
+        if (empty($email)) {
         echo json_encode(["success" => false, "message" => "Email is required"]);
         break;
     }
@@ -202,9 +206,6 @@ break;
         break;
     }
 
-    $stmt = $pdo->prepare("SELECT full_name, email, phone FROM users WHERE id = ?");
-    $stmt->execute([$_SESSION['user_id']]);
-    $user = $stmt->fetch();
 
    $stmt = $pdo->prepare("SELECT full_name, email, phone, national_id FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
@@ -240,10 +241,13 @@ break;
         break;
     }
 
-    $address = $data['address'] ?? '';
+    $address = $data['address'] ?? '';   
+    $zipcode = $data['zipcode'] ?? '';   
+    $city    = $data['city'] ?? '';      
+    $country = $data['country'] ?? '';    
 
-    $stmt = $pdo->prepare("UPDATE users SET address = ? WHERE id = ?");
-    $result = $stmt->execute([$address, $_SESSION['user_id']]);
+    $stmt = $pdo->prepare("UPDATE users SET address = ?, zipcode = ?, city = ?, country = ? WHERE id = ?");
+    $result = $stmt->execute([$address, $zipcode, $city, $country, $_SESSION['user_id']]);
 
     echo json_encode(["success" => $result]);
 

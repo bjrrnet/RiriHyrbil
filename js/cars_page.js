@@ -11,6 +11,7 @@ class CarRentalApp {
         this.setDefaultDates();
         this.loadCars();
         this.checkNotifications();
+        this.checkPendingBooking();
     }
     formatDate(dateString) {
         if (!dateString) return "";
@@ -156,6 +157,9 @@ searchCars() {
         const data = await res.json();
         
         if (!data.loggedIn) {
+            localStorage.setItem('pendingBookingCarId', carId);
+            localStorage.setItem('pendingBookingStart', document.getElementById('start-date')?.value);
+            localStorage.setItem('pendingBookingEnd', document.getElementById('end-date')?.value);
             window.location.href = '../html/bil_login.html';
             return;
         }
@@ -226,6 +230,26 @@ searchCars() {
             }
         } 
         catch (e) { alert("Error connecting to server"); }
+    }
+    async checkPendingBooking() {
+        const carId = localStorage.getItem('pendingBookingCarId');
+        if (!carId) return;
+
+        const res = await fetch('../public/api2.php?action=checkLogin');
+        const data = await res.json();
+        if (!data.loggedIn) return;
+
+        localStorage.removeItem('pendingBookingCarId');
+        const start = localStorage.getItem('pendingBookingStart');
+        const end = localStorage.getItem('pendingBookingEnd');
+        localStorage.removeItem('pendingBookingStart');
+        localStorage.removeItem('pendingBookingEnd');
+
+        if (start) document.getElementById('start-date').value = start;
+        if (end) document.getElementById('end-date').value = end;
+
+        await this.loadCars();
+        await this.bookCar(parseInt(carId));
     }
 
     closeModal() { 
