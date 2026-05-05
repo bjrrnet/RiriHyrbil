@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png"  href="../html/social/head.png?v=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="icon" type="image/png" href="../html/social/head.png?v=2">
     <link rel="stylesheet" href="../css/cars_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Bilix | Cars</title>
 </head>
 <body>
     <header id="db_navbar">
         <div class="nav-left">
             <div id="hamburger-menu">
-                <img src="../html/social/main-menu.png" alt="Menu logo" width="30">
+                <i class="fa-solid fa-bars"></i>
                 <span class="menu-text">Menu</span>
             </div>
             <div id="bilix-logo">
@@ -23,12 +24,11 @@
         
         <div class="nav-right">
             <a href="../html/bil_login.html" class="icon-item">
-                <img src="../html/social/user-icon.png" alt="User" >
+                <i class="fa-solid fa-user"></i>
                 <span>Log In</span>
             </a>
-
             <a href="../html/cars_page.html" class="icon-item">
-                <img src="../html/social/boka.png" alt="Boka">
+                <i class="fa-solid fa-car"></i>
                 <span>Book Car</span>
             </a>
         </div>
@@ -52,7 +52,7 @@
                 <div class="search-form">
                     <div class="form-group">
                         <label for="location">Pickup Location</label>
-						<select id="location">
+                        <select id="location">
                             <option value="">Select City</option>
                             <option value="göteborg">Göteborg</option>
                             <option value="malmö">Malmö</option>
@@ -89,21 +89,40 @@
             </div>
         </section>
     </div>
-    <div id="booking-modal" class="modal">
-    <div class="modal-content">
+    <div id="booking-modal" class="modal" style="display:none;">
+        <div class="modal-content">
             <h2 class="modal-title">Confirm Your Booking</h2>
             <div id="modal-car-details" class="modal-car-details">
             </div>
             <div class="modal-form">
                 <label class="modal-label">National ID Number:</label>
-               <input type="tel" id="national-id-input" class="modal-input" placeholder="Enter National ID number"maxlength="12">
+                <input type="tel" id="national-id-input" class="modal-input" placeholder="YYYYMMDDXXXX" maxlength="12">
                 <span id="id-error" class="error-message"></span>
             </div>
 
             <button id="confirm-booking-btn" class="confirm-booking-btn">
-                Confirm Final Booking
+                Proceed to BankID
             </button>
+        </div>
+    </div>
 
+    <div id="bankid-modal" class="bankid-overlay" style="display:none;">
+        <div class="bankid-card">
+            <h3>BankID med QR-kod</h3>
+            <p class="bankid-subtext">Öppna BankID-appen och skanna koden</p>
+            
+            <div class="bankid-qr-container">
+                <img src="../html/social/QR.png" alt="QR" class="bankid-qr-img">
+                <p class="bankid-timer-text">Tid kvar: <span id="bankid-timer">5:00</span></p>
+            </div>
+
+            <button onclick="carRental.confirmPayment()" class="bankid-confirm-btn">
+                Bekräfta & Betala
+            </button>
+            
+            <button onclick="document.getElementById('bankid-modal').style.display='none'" class="bankid-cancel-btn">
+                Avbryt
+            </button>
         </div>
     </div>
 

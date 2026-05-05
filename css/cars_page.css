@@ -217,7 +217,7 @@ header p {
     width: 100%;
     height: 100%;
     background-color: rgba(30, 50, 150, 0.4);
-    backdrop-filter: blur(1px); /* إضافة تغبيش للخلفية لمظهر عصري */
+    backdrop-filter: blur(1px); 
 }
 
 .modal-content {
@@ -231,7 +231,7 @@ header p {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    border-top: 5px solid #e85111; /* خط برتقالي علوي */
+    border-top: 5px solid #e85111; 
 }
 
 .modal-title {
@@ -316,6 +316,90 @@ header p {
 .availability-tag:hover::after {
     opacity: 1;
     visibility: visible;
+}
+.bankid-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bankid-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.bankid-card h3 {
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-family: sans-serif;
+}
+
+.bankid-subtext {
+    color: #666;
+    font-size: 13px;
+    font-family: sans-serif;
+}
+
+.bankid-qr-container {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.bankid-qr-img {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 10px;
+}
+
+.bankid-timer-text {
+    font-size: 13px;
+    color: #555;
+    font-family: sans-serif;
+}
+
+#bankid-timer {
+    font-weight: bold;
+    color: #193E8F;
+}
+
+.bankid-confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: #193E8F;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.bankid-confirm-btn:hover {
+    background: #122d69;
+}
+
+.bankid-cancel-btn {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: underline;
 }
 
 .confirm-booking-btn {

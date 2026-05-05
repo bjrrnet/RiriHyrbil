@@ -166,45 +166,49 @@ class CarRentalApp {
         this.searchCars();
     }
     async bookCar(carId) {
-        const res = await fetch('../public/api2.php?action=checkLogin');
-        const data = await res.json();
-        
-        if (!data.loggedIn) {
-            localStorage.setItem('pendingBookingCarId', carId);
-            localStorage.setItem('pendingBookingStart', document.getElementById('start-date')?.value);
-            localStorage.setItem('pendingBookingEnd', document.getElementById('end-date')?.value);
-            window.location.href = '../html/bil_login.html';
-            return;
-        }
-
-        const car = this.cars.find(c => c.id === carId);
-        const start = document.getElementById('start-date')?.value;
-        const end = document.getElementById('end-date')?.value;
-        
-        if (!start || !end) return alert('Please select dates in the search bar first');
-
-        const days = Math.ceil(Math.abs(new Date(end) - new Date(start)) / (1000*60*60*24)) || 1;
-        const total = days * car.price;
-        
-        this.selectedCarForBooking = { ...car, days, total, start, end };
-
-        if (data.national_id) {
-            this.selectedCarForBooking.national_id = data.national_id;
-            this.executeBooking();
-            return;
-        }
-        
-        const detailsContainer = document.getElementById('modal-car-details');
-        if (detailsContainer) {
-            detailsContainer.innerHTML = `
-                <p>Booking <b>${car.brand} ${car.car_name}</b></p>
-                <p>Duration: ${days} days (${start} to ${end})</p>
-                <p>Total Price: <b>${total.toLocaleString()} SEK</b></p>
-            `;
-        }
-        
-        document.getElementById('booking-modal').style.display = 'block';
+    const res = await fetch('../public/api2.php?action=checkLogin');
+    const data = await res.json();
+    
+    if (!data.loggedIn) {
+        localStorage.setItem('pendingBookingCarId', carId);
+        localStorage.setItem('pendingBookingStart', document.getElementById('start-date')?.value);
+        localStorage.setItem('pendingBookingEnd', document.getElementById('end-date')?.value);
+        window.location.href = '../html/bil_login.html';
+        return;
     }
+
+    const car = this.cars.find(c => c.id === carId);
+    const start = document.getElementById('start-date')?.value;
+    const end = document.getElementById('end-date')?.value;
+    
+    if (!start || !end) return alert('Please select dates in the search bar first');
+
+    if (new Date(start) >= new Date(end)) {
+                this.showError('End date must be after start date');
+                return;
+            }
+    const days = Math.ceil(Math.abs(new Date(end) - new Date(start)) / (1000*60*60*24)) || 1;
+    const total = days * car.price;
+    
+    this.selectedCarForBooking = { ...car, days, total, start, end };
+
+    if (data.national_id) {
+        this.selectedCarForBooking.national_id = data.national_id;
+        this.executeBooking();
+        return;
+    }
+    
+    const detailsContainer = document.getElementById('modal-car-details');
+    if (detailsContainer) {
+        detailsContainer.innerHTML = `
+            <p>Booking <b>${car.brand} ${car.car_name}</b></p>
+            <p>Duration: ${days} days (${start} to ${end})</p>
+            <p>Total Price: <b>${total.toLocaleString()} SEK</b></p>
+        `;
+    }
+    
+    document.getElementById('booking-modal').style.display = 'block';
+}
 
     async executeBooking() {
         const input = document.getElementById('national-id-input');
@@ -215,34 +219,73 @@ class CarRentalApp {
             return;
         }
 
+        this._tempNationalId = nationalId;
+
+        this.closeModal();
+        document.getElementById('bankid-modal').style.display = 'flex';
+        
+        this.startBankIDTimer();
+    }
+
+    startBankIDTimer() {
+        let timeLeft = 30; 
+        const timerDisplay = document.getElementById('bankid-timer');
+        
+        if (this._bankidInterval) clearInterval(this._bankidInterval);
+        
+        this._bankidInterval = setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            if (timerDisplay) {
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(this._bankidInterval);
+                document.getElementById('bankid-modal').style.display = 'none';
+                this.showError("Session expired. Please try again.");
+            }
+            timeLeft--;
+        }, 1000);
+    }
+
+    async confirmPayment() {
+        clearInterval(this._bankidInterval);
+        document.getElementById('bankid-modal').style.display = 'none';
+
         const bookingData = {
             car_id: this.selectedCarForBooking.id,
             pickup_date: this.selectedCarForBooking.start,
             return_date: this.selectedCarForBooking.end,
             total_days: this.selectedCarForBooking.days,
             total_price: this.selectedCarForBooking.total,
-            national_id: nationalId
+            national_id: this._tempNationalId
         };
 
         try {
+            this.showLoading(true);
             const res = await fetch('../public/api2.php?action=book', {
                 method: 'POST',
                 body: JSON.stringify(bookingData),
                 headers: { 'Content-Type': 'application/json' }
             });
             const result = await res.json();
-            
+
             if (result.success) {
                 localStorage.setItem('hasNewBooking', 'true');
                 this.showSuccess("Booking Successful!");
-                this.closeModal();
                 this.loadCars(); 
                 this.checkNotifications();
             } else {
                 this.showError(result.message || "Failed to book car");
             }
-        } 
-        catch (e) { alert("Error connecting to server"); }
+        } catch (e) {
+            console.error(e);
+            this.showError("Network error. Could not complete booking.");
+        } finally {
+            this.showLoading(false);
+        }
     }
     async checkPendingBooking() {
         const carId = localStorage.getItem('pendingBookingCarId');
