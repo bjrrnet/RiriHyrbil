@@ -1,32 +1,140 @@
+* { 
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
+}
 
-#bilix-logo { 
-    position: absolute; 
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 90px;
-    z-index: 1000; 
-    display: flex; 
-    align-items: center; 
-    justify-content: flex-start; 
-    padding: 0 40px;
-    background-color: transparent; 
-}
-#bilix-logo img { 
-    height: 110px; 
-    width: auto; 
-    display: block; 
-    object-fit: contain; 
-}
 body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; 
+}
+
+.headside-bgColor {
+    background: #f4f4f4; 
     color: #333;
 }
 
+#db_navbar { 
+    position: relative; 
+    top: 0; 
+    width: 100%; 
+    height: 90px;
+    background: linear-gradient(135deg, #505160, #0f1e6e);
+    z-index: 1000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 40px;
+    color: white;
+}
+
+.nav-left { 
+    display: flex; 
+    align-items: center; 
+    gap: 30px; 
+}
+
+#hamburger-menu { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    cursor: pointer; 
+    color: white; 
+}
+
+.menu-text { 
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-top: 2px; }
+
+#bilix-logo img { 
+    height: 110px; 
+    width: auto; 
+}
+
+.boka-bil-btn {
+    background-color: #e85111;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.boka-bil-btn:hover { 
+    background-color: #e85111; }
+
+
+.icon-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    font-size: 14px;        
+    gap: 5px;               
+    position: relative;     
+}
+.icon-item, #hamburger-menu {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+.icon-item i, #hamburger-menu i { font-size: 22px; }
+.icon-item span, .menu-text { font-size: 13px; margin-top: 4px; }
+
+
+.icon-item:hover {
+    transform: scale(1.1);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;              
+}
+#menu-options { position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 280px; 
+    height: 100vh; 
+    background-color: rgba(0,0,0,0.9); 
+    display: flex; flex-direction: column; 
+    padding-top: 80px; 
+    transition: transform 0.3s ease; 
+    transform: translateX(-100%); 
+    z-index: 2001;
+}
+#menu-options.show { 
+    transform: translateX(0); 
+}
+#menu-options a { 
+    color: white; 
+    text-decoration: none; 
+    font-size: 1.1rem; 
+    padding: 15px 25px; 
+    border-bottom: 1px solid #333; 
+}
+#menu-options a:hover { 
+    background: #333; 
+    color: #e85111; 
+}
+#overlay { 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    display: none; 
+    z-index: 2000; 
+}
+#overlay.show { 
+    display: block; 
+}
 .contact-wrapper {
     flex: 1;
     display: flex;

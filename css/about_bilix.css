@@ -1,7 +1,7 @@
-* {
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
+* { 
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
 }
 
 body {
@@ -9,6 +9,11 @@ body {
     padding: 0;
     width: 100%;
     overflow-x: hidden; 
+}
+
+.headside-bgColor {
+    background: #f4f4f4; 
+    color: #333;
 }
 
 #db_navbar { 
@@ -73,6 +78,16 @@ body {
     gap: 5px;               
     position: relative;     
 }
+.icon-item, #hamburger-menu {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+.icon-item i, #hamburger-menu i { font-size: 22px; }
+.icon-item span, .menu-text { font-size: 13px; margin-top: 4px; }
 
 
 .icon-item:hover  {
