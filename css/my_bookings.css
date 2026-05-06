@@ -1,7 +1,7 @@
-* {    
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
+* { 
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
 }
 
 body {
@@ -34,8 +34,6 @@ body {
 #bilix-logo img { 
     height: 110px; 
     width: auto; 
-    display: block; 
-    object-fit: contain; 
 }
 
 .nav-right {
@@ -82,18 +80,24 @@ body {
     gap: 5px;               
     position: relative;     
 }
-
-.icon-item img {
-    height: 45px;           
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
+.icon-item i {
+    font-size: 22px;
 }
 
-.icon-item:hover img {
+.icon-item span {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.icon-item:hover {
     transform: scale(1.1);
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;              
+}
 .bookings-container {
     max-width: 1000px;
     margin: 40px auto;

@@ -3,15 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Bilix | Contact Us</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <link rel="icon" type="image/png"  href="../html/social/head.png?v=2">
     <link rel="stylesheet" href="../css/bil_contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 <body>
-    <header id="bilix-logo">
-            <a href="biluthyrning.html">
+    <header id="db_navbar">
+    <div class="nav-left">
+        <div id="hamburger-menu">
+            <i class="fa-solid fa-bars"></i>
+            <span class="menu-text">Menu</span>
+        </div>
+        <div id="bilix-logo">
+            <a href="../html/biluthyrning.html">
                 <img src="../html/social/car_logo.png" alt="Bilix logo">
-            </a> 
+            </a>    
+        </div>
+    </div>
+    
+    <div class="nav-right">
+        <a href="../html/bil_login.html" class="icon-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Log In</span>
+        </a>
+
+        <a href="../html/cars_page.html" class="icon-item">
+            <i class="fa-solid fa-car"></i>
+            <span>Book Car</span>
+        </a>
+    </div>
+
+        <div id="menu-options" class="hidden">
+            <a href="../html/about_bilix.html">About Bilix</a>
+            <a href="../html/bil_contact.html">Contact</a>
+            <a href="../html/bil_login.html">Log In</a>
+        </div>
+        <div id="overlay"></div>
     </header>
 
     <main class="contact-wrapper">
@@ -80,7 +109,7 @@
                 <p>Online car rental service.</p>
             </div>
             <div class="footer-col">
-               <h6>Our Cars</h6>
+                <h6>Our Cars</h6>
                 <p><a href="#">Electric </a></p>
                 <p><a href="#">SUV</a></p>
                 <p><a href="#">Luxury</a></p>
