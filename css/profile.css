@@ -1,7 +1,7 @@
-* {    
-    box-sizing: border-box; 
-    margin: 0;
-    padding: 0;
+* { 
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
 }
 
 body {
@@ -34,15 +34,14 @@ body {
 #bilix-logo img { 
     height: 110px; 
     width: auto; 
-    display: block; 
-    object-fit: contain; 
 }
 
 .nav-right {
     display: flex;
     align-items: center;
     gap: 30px;
-    justify-content: flex-end;              
+    justify-content: flex-end;
+    min-width: 150px;
 }
 .nav-center {
     flex-grow: 1; 
@@ -83,22 +82,23 @@ body {
     position: relative;     
 }
 
-.icon-item img {
-    height: 45px;           
-    width: auto;
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
+.icon-item i {
+    font-size: 22px;
+}
+.icon-item span {
+    font-size: 13px;
+    margin-top: 4px;
 }
 
-.icon-item:hover img {
+.icon-item:hover {
     transform: scale(1.1);
 }
-#menu-options {
-    position: fixed;
-    top: 0;
+#menu-options { 
+    position: fixed; 
+    top: 0; 
     left: -280px; 
-    width: 280px;
-    height: 100vh;
+    width: 280px; 
+    height: 100vh; 
     background: #0f1e6e;
     transition: 0.3s ease;
     z-index: 2001;
@@ -109,9 +109,9 @@ body {
 
 #menu-options.show { left: 0; }
 
-#menu-options a {
-    color: white;
-    padding: 15px 25px;
+#menu-options a { 
+    color: white; 
+    padding: 15px 25px; 
     text-decoration: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
 }
@@ -124,15 +124,15 @@ body {
     font-weight: bold;
 }
 
-#overlay {
-    position: fixed;
+#overlay { 
+    position: fixed; 
     top: 0;
-    left: 0;
+    left: 0; 
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    z-index: 2000;
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    display: none; 
+    z-index: 2000; 
 }
 
 #overlay.show { display: block; }
@@ -144,31 +144,6 @@ body {
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    #db_navbar {
-        height: 70px !important;
-        padding: 0 15px !important;
-        justify-content: space-between !important;
-    }
-
-    .nav-center { display: none !important; }
-
-    #hamburger-menu { display: flex; } 
-
-    #bilix-logo {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #bilix-logo img { height: 45px !important; }
-
-    .nav-right { min-width: auto !important; }
-    
-    .icon-item img { height: 30px !important; }
-    .icon-item span { font-size: 10px !important; }
-}
 
 .profile-container {
     min-height: calc(100vh - 200px); 
@@ -186,12 +161,38 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr; 
     gap: 20px;
+    align-items: start;
 }
 
-@media (max-width: 768px) {
-    .profile-grid {
-        grid-template-columns: 1fr;
-    }
+.personal-details {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.profile-card-group {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.logout-section {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.section-divider {
+    grid-column: 1 / -1;
+    border: 0;
+    height: 1px;
+    background: #eee;
+    margin: 5px 0;
+}
+.danger-zone {
+    grid-column: 1 / -1;
+    border: 1px solid #ffcccc;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fffafa;
 }
 
 .profile-card {
@@ -204,7 +205,7 @@ body {
 
 .detail-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
     margin-bottom: 20px;
     padding-bottom: 15px;
@@ -247,11 +248,13 @@ body {
     align-items: center;
     gap: 0;
     margin-top: 8px;
+    width: 100%;
     max-width: 300px; 
 }
 
 #user-phone-number {
     flex: 1;
+    min-width: 0;
     padding: 10px 15px;
     border: 2px solid #ddd;
     border-right: none; 
@@ -276,6 +279,7 @@ body {
     font-weight: 600;
     font-size: 14px;
     height: 40px; 
+    white-space: nowrap;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -291,6 +295,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 10px; 
     margin-top: 8px;
+    width: 100%;
     max-width: 400px;
 }
 
@@ -302,6 +307,8 @@ body {
     outline: none;
     transition: all 0.3s ease;
     height: 40px;
+    width: 100%;
+    min-width: 0;
 }
 
 .address-group input:focus {
@@ -333,24 +340,6 @@ body {
 .btn-main-logout {
     background: #e85111; 
     color: white; 
-    width: 100%; 
-    border: none; 
-    margin-top: 15px; 
-    cursor: pointer; 
-    border-radius: 5px; 
-    padding: 12px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-}
-.logout-section {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    padding: 0 20px;
-}
-.btn-main-logout {
-    background: #e85111; 
-    color: white; 
     max-width: 400px; 
     width: 100%; 
     border: none; 
@@ -367,19 +356,6 @@ body {
     background: #c7430d;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-.section-divider {
-    border: 0;
-    height: 1px;
-    background: #eee;
-    margin: 25px 0;
-}
-
-.danger-zone {
-    border: 1px solid #ffcccc;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fffafa;
 }
 
 .danger-zone h3 {
@@ -414,7 +390,7 @@ body {
 #db_footer { 
     background: linear-gradient(135deg, #505160, #0f1e6e); 
     color: rgb(255, 255, 255); 
-    
+
 }
 .footer-top { 
     display: flex; 
@@ -465,14 +441,52 @@ body {
 .footer-col a { 
     color: #ffffff; 
     text-decoration: none; 
-    
-    
+
+
 }
 .footer-bottom { 
     text-align: center;
     background: #1a1a1a; 
     padding: 15px; 
     font-size: 14px; 
+}
+@media (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+        display: flex;           
+        flex-direction: column; 
+    }
+
+    .personal-details {
+        order: 1;
+    }
+
+    .profile-card-group {
+        order: 2;
+    }
+
+    .logout-section {
+        order: 3;
+        margin-top: 10px;
+        justify-content: center;
+        display: flex;
+    }
+
+    .section-divider {
+        order: 4;
+    }
+
+    .danger-zone {
+        order: 5;
+    }
+
+    .address-group {
+        max-width: 100%;
+    }
+
+    .phone-input-group {
+        max-width: 100%;
+    }
 }
 @media (max-width: 768px) {
     #db_navbar {
@@ -536,5 +550,54 @@ body {
     .icon-item span {
         font-size: 10px !important;
         white-space: nowrap;
+    }
+
+    .profile-container {
+        padding: 0 12px 40px;
+    }
+
+    .profile-header h1 {
+        margin: 30px 0 20px 0;
+        font-size: 22px;
+    }
+
+    .profile-card {
+        padding: 18px 15px;
+    }
+
+    .detail-item {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .phone-input-group {
+        max-width: 100%;
+    }
+
+    .address-group {
+        max-width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    #save-address {
+        grid-column: span 1;
+    }
+
+    .logout-section {
+        padding: 0;
+    }
+
+    .btn-main-logout {
+        max-width: 100%;
+        font-size: 15px;
+    }
+
+    .footer-main {
+        padding: 20px 15px;
+        gap: 25px;
+    }
+
+    .footer-top {
+        padding: 20px 15px;
     }
 }
